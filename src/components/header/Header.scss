@@ -1,0 +1,67 @@
+#app.menu-active .header {
+    width: calc(100% - 13em);
+}
+
+.header {
+    height: 3em;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background-color: blueviolet;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+    margin-left: 0;
+    transition: margin-left .5s, width .5s;
+    display: flex;
+    justify-content: space-between;
+
+    .left {
+        display: flex;
+    }
+
+    &-title {
+        display: inline;
+        margin: 0;
+        line-height: 1.5em;
+        color: whitesmoke;
+    }
+
+    &-status {
+        display: flex;
+        margin: 0 1em;
+        color: whitesmoke;
+
+        h3 {
+            display: flex;
+            gap: .2em;
+            align-items: center;
+        }
+
+        a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    & .menu-icon {
+        padding: 0.3em;
+        cursor: pointer;
+        display: inline-block;
+        transition: transform .2s;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+
+        & div {
+            width: 35px;
+            height: 5px;
+            background-color: whitesmoke;
+            margin: 6px 0;
+        }
+    }
+}

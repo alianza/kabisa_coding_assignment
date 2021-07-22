@@ -1,0 +1,218 @@
+$menu-size: 13em;
+$header-height: 3em;
+
+body {
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+
+    &.scroll_disabled {
+        overflow: hidden;
+    }
+}
+
+.MuiSvgIcon-root {
+    //vertical-align: middle;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+#app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    position: relative;
+    min-height: 100vh;
+    margin-top: -$header-height;
+    padding-top: $header-height;
+
+    &.menu-active {
+        & .header {
+            margin-left: $menu-size;
+        }
+
+        & .menu {
+            transform: none;
+        }
+
+        & .content {
+            margin-left: $menu-size;
+        }
+
+        & .footer {
+            margin-left: $menu-size;
+        }
+
+        & #loader {
+            padding-left: $menu-size;
+        }
+    }
+
+    & .content {
+        margin-top: $header-height;
+        transition: margin-left .5s;
+        padding: 1em 1em 11em;
+
+        div .title {
+            margin: 0 0 1em 0;
+        }
+    }
+
+    & .button {
+        transition: background-color .2s, color .2s, transform .1s;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        text-align: center;
+        background-color: #f1f1f1;
+        color: black;
+        padding: 16px 30px;
+        border-radius: 5px;
+
+        &:hover {
+            background-color: #222;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        &:active {
+            transform: scale(.98);
+        }
+
+        &-sort {
+            line-height: 2em;
+            font-weight: bold;
+            cursor: pointer;
+            padding: .2em .5em;
+            border-radius: .2em;
+        }
+
+        &-random {
+            position: fixed;
+            z-index: 5;
+            bottom: .8em;
+            right: .8em;
+            box-shadow: 0 0 12px rgba(0, 0, 0, .5);
+        }
+
+        &-catch {
+            position: fixed;
+            z-index: 5;
+            bottom: .8em;
+            left: .8em;
+            box-shadow: 0 0 12px rgba(0, 0, 0, .5);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 90%;
+            padding: 2.5em;
+        }
+
+        &-next {
+            float: right;
+        }
+
+        &-prev {
+            float: left;
+        }
+    }
+
+    & #loader {
+        transition: visibility .5s, opacity 0.5s;
+        position: fixed;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, .5);
+        visibility: hidden;
+        opacity: 0;
+        z-index: 4;
+
+        &.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        & div {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+            position: relative;
+            top: 40%;
+            margin: 0 auto;
+            box-shadow: 0 0 12px 8px rgba(0, 0, 0, .2), inset 0 0 12px 8px rgba(0, 0, 0, .2);
+        }
+    }
+
+    .tooltip::before {
+        content: attr(data-tip);
+        display: inline-block;
+        position: absolute;
+        bottom: 50%;
+        background: #000;
+        color: #FFF;
+        padding: 5px;
+        border-radius: 5px;
+        opacity: 0;
+        margin-bottom: .5em;
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 100%;
+        text-overflow: ellipsis;
+        transition: 0.3s;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+    .tooltip:hover::before {
+        opacity:1;
+        bottom: 100%;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    #app {
+        & .menu {
+            &-close {
+                display: inline-block;
+            }
+        }
+
+        &.menu-active {
+            & .content {
+                margin-left: 0;
+            }
+
+            & .footer {
+                margin-left: 0;
+            }
+        }
+    }
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #aaa;
+    border-radius: 1em;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
