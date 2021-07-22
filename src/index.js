@@ -15,10 +15,12 @@ let firebaseConfig = {
     storageBucket: "kabisa-coding-assignment-jw.appspot.com",
     messagingSenderId: "543412482975",
     appId: "1:543412482975:web:d4464aa22a7bb1c93843aa",
+    databaseURL: "https://kabisa-coding-assignment-jw-default-rtdb.europe-west1.firebasedatabase.app/",
     measurementId: "G-4L0QHDM97F"
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+firebase.database();
 firebase.analytics();
 
 ReactDOM.render(

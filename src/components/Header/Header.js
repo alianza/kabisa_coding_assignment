@@ -12,7 +12,7 @@ function Header(props) {
             setIsSignedIn(!!user);
         });
         return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
-    }, []);
+    });
 
     return (
         <div className="header">

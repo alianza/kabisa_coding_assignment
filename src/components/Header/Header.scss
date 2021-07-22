@@ -32,14 +32,16 @@
 
         h3 {
             display: flex;
-            gap: .2em;
             align-items: center;
+            gap: .2em;
+            font-weight: lighter;
         }
 
         a {
             display: flex;
             align-items: center;
             text-decoration: none;
+            font-weight: bold;
 
             &:hover {
                 text-decoration: underline;
@@ -62,6 +64,16 @@
             height: 5px;
             background-color: whitesmoke;
             margin: 6px 0;
+        }
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .header {
+        &-status{
+            > h3 {
+                display: none !important;
+            }
         }
     }
 }

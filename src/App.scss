@@ -1,18 +1,53 @@
 $menu-size: 13em;
 $header-height: 3em;
 
+:root {
+    --primary: #fff;
+    --secondary: blueViolet;
+
+    --text-primary: #000;
+    --text-secondary: #fff;
+
+    --accent-0: #fff;
+    --accent-1: #fafafa;
+    --accent-2: #eaeaea;
+    --accent-3: #999999;
+    --accent-4: #888888;
+    --accent-5: #666666;
+    --accent-6: #444444;
+    --accent-7: #333333;
+    --accent-8: #111111;
+    --accent-9: #000;
+}
+
+[data-theme='dark'] {
+    --primary: #2b2b2c;
+    --secondary: blueViolet;
+
+    --accent-9: #fff;
+    --accent-8: #fafafa;
+    --accent-7: #eaeaea;
+    --accent-6: #999999;
+    --accent-5: #888888;
+    --accent-4: #666666;
+    --accent-3: #444444;
+    --accent-2: #333333;
+    --accent-1: #111111;
+    --accent-0: #000;
+
+    --text-primary: #fff;
+    --text-secondary: #000;
+}
+
 body {
     padding: 0;
     margin: 0;
     overflow-x: hidden;
+    color: var(--text-primary);
 
     &.scroll_disabled {
         overflow: hidden;
     }
-}
-
-.MuiSvgIcon-root {
-    //vertical-align: middle;
 }
 
 a {
@@ -26,6 +61,8 @@ a {
     min-height: 100vh;
     margin-top: -$header-height;
     padding-top: $header-height;
+    background-color: var(--primary);
+    transition: background-color .35s ease-in-out;
 
     &.menu-active {
         & .header {
@@ -192,6 +229,9 @@ a {
                 margin-left: 0;
             }
         }
+    }
+    .button {
+        width: 100%;
     }
 }
 

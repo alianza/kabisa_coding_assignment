@@ -1,0 +1,79 @@
+.quoteCard {
+    position: relative;
+    border-radius: .2em;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .5), inset 0 0 2px rgba(0, 0, 0, .5);
+    margin: 0 auto;
+    padding: 1em;
+    max-width: 800px;
+    background-color: var(--accent-2);
+    transition: background-color .35s ease-in-out;
+
+    .quote {
+        font-style: italic;
+        text-indent: 2em;
+        font-size: large;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    .info {
+        display: flex;
+        justify-content: space-between;
+
+
+        .author {
+            display: flex;
+            align-items: center;
+        }
+
+        a {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    .rating {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .averageRating {
+        margin-top: .5em;
+
+        span.ratingValue {
+            font-weight: bold;
+        }
+
+        span.ratingAmount {
+            font-size: small;
+            font-style: italic;
+            margin-left: .35em;
+        }
+    }
+
+    &:after {
+        content: "❝";
+        position: absolute;
+        z-index: 1;
+        left: 50%;
+        top: -2px;
+        transform: translate(-50%, -50%);
+        width: 1.3em;
+        height: 1.3em;
+        background: white;
+        box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+        border-radius: 999px;
+        display: grid;
+        place-content: center;
+        padding-top: .5em;
+        color: blueviolet;
+        font-size: 36px;
+        font-style: normal;
+        text-indent: 0;
+        box-sizing: border-box;
+    }
+
+}
