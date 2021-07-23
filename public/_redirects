@@ -1,6 +1,0 @@
-# Netlify single page app url fix
-/*                  /index.html   200
-/quotes.json        http://quotes.stormconsultancy.co.uk/:splat  200!
-/popular.json       http://quotes.stormconsultancy.co.uk/:splat  200!
-/quotes/*.json      http://quotes.stormconsultancy.co.uk/:splat  200!
-/random.json        http://quotes.stormconsultancy.co.uk/:splat  200!
