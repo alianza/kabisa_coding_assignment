@@ -5,6 +5,6 @@ status = 200
 
 [[redirects]]
 from = "/quotes.stormconsultancy.co.uk/*"
-to = "http://webservices.nextbus.com/service/:splat"
+to = "http://quotes.stormconsultancy.co.uk/:splat"
 status = 200
 force = true
