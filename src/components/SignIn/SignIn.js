@@ -22,7 +22,6 @@ const uiConfig = {
 function SignIn(props) {
     const [isSignedIn, setIsSignedIn] = useState(false); // Local signed-in state.
     const history = useHistory();
-    const currentUser = firebase.auth().currentUser
 
     // Listen to the Firebase Auth state and set the local state.
     useEffect(() => {
@@ -31,7 +30,7 @@ function SignIn(props) {
             if (user) { history.push('/profile'); }
         });
         return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
-    }, [history, currentUser]);
+    }, [history, firebase.auth().currentUser]);
 
     const logOut = () => {
         props.logOut();
@@ -50,15 +49,15 @@ function SignIn(props) {
         return (
             <div className="signIn">
                 <h1 className="title">My Profile</h1>
-                {firebase.auth().currentUser &&
+                {props.user &&
                 <>
-                    <p>Welcome: <span>{firebase.auth().currentUser.displayName}!</span> You are now signed-in!</p>
+                    <p>Welcome: <span>{props.user?.displayName}!</span> You are now signed-in!</p>
                     <hr/>
-                    <p>Email: <span>{firebase.auth().currentUser.email}!</span></p>
+                    <p>Email: <span>{props.user?.email}!</span></p>
                     <hr/>
-                    <p>Creation date: <span>{firebase.auth().currentUser.metadata.creationTime}!</span></p>
+                    <p>Creation date: <span>{props.user?.metadata.creationTime}!</span></p>
                     <hr/>
-                    <p>Last sign on: <span>{firebase.auth().currentUser.metadata.lastSignInTime}!</span></p>
+                    <p>Last sign on: <span>{props.user?.metadata.lastSignInTime}!</span></p>
                     <hr/>
                     <button className="button" onClick={logOut}>Sign-out</button>
                 </>

@@ -8,34 +8,26 @@ import { Rating } from "@material-ui/lab";
 
 function QuoteCard(props) {
     const [value, setValue] = useState(0);
-    const [user, setUser] = useState();
     const [averageRating, setAverageRating] = useState(0);
     const [numberOfRatings, setNumberOfRatings] = useState(0);
 
-    // Listen to the Firebase Auth state and set the local state.
     useEffect(() => {
-        const unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
-            setUser(user);
-        });
-        return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
-    }, []);
+        setValue(0)
 
-    useEffect(() => {
-    const dbRefObject = firebase.database().ref().child('ratings').child(props.quote.id);
+        const dbRefObject = firebase.database().ref().child('ratings').child(props.quote.id);
 
-    dbRefObject.on('value', snap => {
-        let averageRating = 0
-        let numberOfRatings = 0
-        snap.forEach(rating => {
-            console.log(rating.key, rating.val());
-            averageRating += rating.val().rating
-            numberOfRatings++;
-            if (rating.key === firebase.auth().currentUser.uid) {
-                setValue(rating.val().rating)
-            }
-        })
-        setAverageRating(averageRating / snap.numChildren())
-        setNumberOfRatings(numberOfRatings)
+        dbRefObject.on('value', snapshot => {
+            let averageRating = 0
+            let numberOfRatings = 0
+            snapshot.forEach(rating => {
+                averageRating += rating.val().rating
+                numberOfRatings++;
+                if (rating.key === firebase.auth().currentUser.uid) {
+                    setValue(rating.val().rating)
+                }
+            })
+            setAverageRating(averageRating / snapshot.numChildren())
+            setNumberOfRatings(numberOfRatings)
         })
     })
 
@@ -44,10 +36,10 @@ function QuoteCard(props) {
 
         const ratingRef = firebase.database().ref().child('ratings').child(props.quote.id)
         const rating = {
-            [user.uid]: {
-            quoteId: props.quote.id,
-            userId: user.uid,
-            rating: newValue
+            [props.user.uid]: {
+                quoteId: props.quote.id,
+                userId: props.user.uid,
+                rating: newValue
             }
         }
         // const rating = {
@@ -66,19 +58,19 @@ function QuoteCard(props) {
             <p className="quote">❝ {props.quote.quote}❞</p>
             <div className="info">
                 <cite className="author"><RecordVoiceOverIcon style={{marginRight: '6px'}} fontSize={"small"}/>{props.quote.author}</cite>
-                <NavLink to={`/quote/${props.quote.id}`}>permalink <LinkIcon style={{marginLeft: '6px'}} fontSize={"small"}/></NavLink>
+                {props.match.path !== '/quote/:quoteId' &&
+                <NavLink to={`/quote/${props.quote.id}`}>permalink <LinkIcon style={{marginLeft: '6px'}} fontSize={"small"}/></NavLink>}
             </div>
             <div className="rating">
-            {!!user &&
-                <Rating
+                {!!props.user && <Rating
                     name="rating"
                     value={value}
-                    onChange={(event, newValue) => { if (newValue) { createRating(newValue) } }}
-                />
-            }
-            <div className="averageRating">Average rating: <span className="ratingValue">{Math.round(averageRating * 100) / 100 || 'Not yet rated'}</span>
-                {!!averageRating && <span className="ratingAmount">Based on {numberOfRatings} vote{numberOfRatings > 1 && 's'}!</span>}
-            </div>
+                    onChange={(event, newValue) => { if (newValue) { createRating(newValue) }}}
+                /> }
+                <div className="averageRating">Average rating: <span
+                    className="ratingValue">{Math.round(averageRating * 100) / 100 || 'Not yet rated'}</span>
+                    {!!averageRating && <span className="ratingAmount">Based on {numberOfRatings} vote{numberOfRatings > 1 && 's'}!</span>}
+                </div>
             </div>
         </blockquote>
     );

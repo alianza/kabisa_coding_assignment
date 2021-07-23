@@ -18,7 +18,7 @@ function Quote(props) {
     return (
         <div className="quote">
             <h1 className="title">Quote #{props.match.params.quoteId}</h1>
-                {quote ? <QuoteCard quote={quote}/> : <div>No quote with id '{props.match.params.quoteId}' found!</div> }
+                {quote ? <QuoteCard match={props.match} user={props.user} quote={quote}/> : <div>No quote with id '{props.match.params.quoteId}' found!</div> }
         </div>
     );
 }

@@ -7,7 +7,10 @@ function Footer(props) {
     return (
         <div className="footer">
             <p>Quoty quotes network</p>
-            <button className="button" onClick={() => props.onThemeButtonClick()}><NightsStayIcon/></button>
+            {props.darkTheme ?
+                <button className="button" onClick={() => props.onThemeButtonClick()}><Brightness7Icon/></button> :
+                <button className="button" onClick={() => props.onThemeButtonClick()}><NightsStayIcon/></button>
+            }
         </div>
     );
 }

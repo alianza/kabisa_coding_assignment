@@ -7,7 +7,7 @@
     position: fixed;
     width: 100%;
     top: 0;
-    background-color: blueviolet;
+    background-color: var(--secondary);
     box-shadow: 0 0 5px rgba(0, 0, 0, .5);
     margin-left: 0;
     transition: margin-left .5s, width .5s;
