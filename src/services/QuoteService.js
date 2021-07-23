@@ -1,5 +1,5 @@
 const QuoteService = {
-    baseUrl: "http://quotes.stormconsultancy.co.uk/",
+    baseUrl: "https://quotes.stormconsultancy.co.uk/",
 
     doLoad(url) { // Base method for doing http Get requests
         if (!url.includes(this.baseUrl)) { url = this.baseUrl + url; }

@@ -42,7 +42,7 @@ function MyQuotes(props) {
             {quoteList?.length ? quoteList.map(quote =>
                     (<QuoteCard key={quote.id} quote={quote} user={props.user} match={props.match}/>)
                 ) :
-            <div>You have not rated any quotes yet... <br /> Rate some quotes via the <NavLink to={"/"}>homepage</NavLink></div>
+            <div className="noQuotes">You have not rated any quotes yet... <br /> Rate some quotes via the <NavLink to={"/"}>homepage</NavLink></div>
             }
 
         </div>

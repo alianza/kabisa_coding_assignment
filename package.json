@@ -7,7 +7,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "serve -s ./build"
+    "serve": "serve -s ./build"
   },
   "dependencies": {
     "@material-ui/core": "^4.12.2",
