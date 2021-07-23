@@ -24,7 +24,7 @@ function App() {
     });
 
     useEffect(() => {
-        console.log('darkTheme', darkTheme)
+        // console.log('darkTheme', darkTheme)
         if (darkTheme) { document.body.dataset.theme = 'dark' }
         else { document.body.dataset.theme = '' }
     }, [darkTheme])

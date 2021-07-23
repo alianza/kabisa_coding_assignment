@@ -16,7 +16,7 @@ function HomePage(props) {
         Loader.showLoader();
         quoteService.getRandomQuote().then(quote => {
             setQuote(quote)
-            console.log(quote);
+            // console.log(quote);
             Loader.hideLoader();
         })
     }
