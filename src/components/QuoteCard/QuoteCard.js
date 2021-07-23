@@ -45,7 +45,7 @@ function QuoteCard(props) {
             <p className="quote">❝ {props.quote.quote}❞</p>
             <div className="info">
                 <cite className="author"><RecordVoiceOverIcon style={{marginRight: '6px'}} fontSize={"small"}/>{props.quote.author}</cite>
-                <a target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=${props.quote.permalink}`}>Share<ShareIcon style={{marginLeft: '6px'}} fontSize={"small"}/></a>
+                <a target="_blank" rel="noreferrer" href={`https://www.facebook.com/sharer/sharer.php?u=${props.quote.permalink}`}>Share<ShareIcon style={{marginLeft: '6px'}} fontSize={"small"}/></a>
                 {props.match.path !== '/quote/:quoteId' &&
                 <NavLink to={`/quote/${props.quote.id}`}>permalink <LinkIcon style={{marginLeft: '6px'}} fontSize={"small"}/></NavLink>}
             </div>
