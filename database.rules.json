@@ -1,0 +1,20 @@
+{
+  "rules": {
+    "quoteRatings": {
+      ".read": true,
+      ".write": true,
+      ".indexOn": [
+        "userId",
+        "quoteId"
+      ]
+    },
+    "userRatings": {
+      ".read": true,
+      ".write": true,
+      ".indexOn": [
+        "userId",
+        "quoteId"
+      ]
+    }
+  }
+}
