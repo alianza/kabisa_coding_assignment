@@ -7,7 +7,7 @@ function Menu(props) {
 
     const about = () => {
         alert('This is a react based quotes Application!\n' +
-            'for the kabisa coding assigment!\n' +
+            'For the kabisa coding assigment!\n' +
             'Made by Jan-Willem van Bremen - 2021');
     }
 

@@ -104,6 +104,19 @@ a {
 
         div .title {
             margin: 0 0 1em 0;
+            position: relative;
+            display: inline-block;
+
+            &:hover::before {
+                transition: opacity 1s ease-in, bottom .5s ease-in;
+            }
+
+            &::before {
+                white-space: nowrap;
+                max-width: unset;
+                left: unset;
+                transform: unset;
+            }
         }
     }
 
@@ -213,15 +226,16 @@ a {
         transform: translateX(-50%);
         max-width: 100%;
         text-overflow: ellipsis;
-        transition: 0.3s;
+        transition: opacity .3s ease-in-out, bottom .3s ease-in-out;
         overflow: hidden;
         pointer-events: none;
+        font-size: medium;
+        z-index: 5;
     }
 
     .tooltip:hover::before {
         opacity: .95;
         bottom: 100%;
-        z-index: 5;
     }
 }
 

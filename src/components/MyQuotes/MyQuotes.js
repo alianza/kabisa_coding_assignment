@@ -38,7 +38,7 @@ function MyQuotes(props) {
 
     return (
         <div className="quotes">
-            <h1 className="title">My Quotes</h1>
+            <h1 className="title tooltip" data-tip="All quotes you voted for">My Quotes</h1>
             {quoteList?.length ? quoteList.map(quote =>
                     (<QuoteCard key={quote.id} quote={quote} user={props.user} match={props.match}/>)
                 ) :

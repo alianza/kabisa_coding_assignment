@@ -24,7 +24,7 @@ function HomePage(props) {
     return (
         <div className="home">
             <div>
-                <h1 className="title">Random Quote</h1>
+                <h1 className="title tooltip" data-tip="Display a random quote">Random Quote</h1>
                 {quote && <QuoteCard match={props.match} user={props.user} quote={quote}/>}
             </div>
             <RefreshButton onRefresh={fetchRandomQuote}/>

@@ -59,7 +59,7 @@ function SignIn(props) {
     } else {
         return (
             <div className="signIn">
-                <h1 className="title">My Profile</h1>
+                <h1 className="title tooltip" data-tip="Your profile information">My Profile</h1>
                 {props.user &&
                 <>
                     <p>Welcome: <span>{props.user?.displayName}!</span> You are now signed-in!</p>
