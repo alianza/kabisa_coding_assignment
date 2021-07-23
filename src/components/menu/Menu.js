@@ -23,6 +23,7 @@ function Menu(props) {
             <h1>Menu</h1>
             <ul className="menu-top" onClick={() => closeMenuIfMobile()}>
                 <li><NavLink to={'/'} isActive={ (match) => pathname.includes('/page') || match.url === '/'} activeClassName={'active'} onClick={() => scrollToTop()}>Home</NavLink></li>
+                <li className="login-only"><NavLink to={'/popular'} isActive={() => pathname.includes('/popular')} activeClassName={'active'}>Popular Quotes</NavLink></li>
                 {!props.user ?
                 <li className="logout-only"><NavLink to={'/login'} isActive={ () => pathname.includes('/login') } activeClassName={'active'}>Login</NavLink></li>
                     :

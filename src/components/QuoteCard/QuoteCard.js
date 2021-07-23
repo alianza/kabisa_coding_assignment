@@ -5,6 +5,8 @@ import { NavLink } from "react-router-dom";
 import RecordVoiceOverIcon from "@material-ui/icons/RecordVoiceOver";
 import LinkIcon from "@material-ui/icons/Link";
 import { Rating } from "@material-ui/lab";
+import FirebaseService from "../../services/FirebaseService";
+import ShareIcon from '@material-ui/icons/Share';
 
 function QuoteCard(props) {
     const [value, setValue] = useState(0);
@@ -12,9 +14,11 @@ function QuoteCard(props) {
     const [numberOfRatings, setNumberOfRatings] = useState(0);
 
     useEffect(() => {
+        // const {ownRating, averageRating, numberOfRatings} = FirebaseService.getQuoteRatings(props.quote.id, props?.user?.uid)
+
         setValue(0)
 
-        const dbRefObject = firebase.database().ref().child('ratings').child(props.quote.id);
+        const dbRefObject = firebase.database().ref('quoteRatings').child(props.quote.id);
 
         dbRefObject.on('value', snapshot => {
             let averageRating = 0
@@ -22,35 +26,18 @@ function QuoteCard(props) {
             snapshot.forEach(rating => {
                 averageRating += rating.val().rating
                 numberOfRatings++;
-                if (rating.key === firebase.auth().currentUser.uid) {
+                if (rating.key === props?.user?.uid) {
                     setValue(rating.val().rating)
                 }
             })
             setAverageRating(averageRating / snapshot.numChildren())
             setNumberOfRatings(numberOfRatings)
         })
-    })
+    }, [props.quote.id, props?.user?.uid] )
 
     function createRating(newValue) {
         setValue(newValue)
-
-        const ratingRef = firebase.database().ref().child('ratings').child(props.quote.id)
-        const rating = {
-            [props.user.uid]: {
-                quoteId: props.quote.id,
-                userId: props.user.uid,
-                rating: newValue
-            }
-        }
-        // const rating = {
-        //     [5]: {
-        //         quoteId: props.quote.id,
-        //         userId: 'testUserId123',
-        //         rating: 4
-        //     }
-        // }
-        console.log(rating);
-        ratingRef.update(rating)
+        FirebaseService.addRating(newValue, props.quote.id, props.user.uid)
     }
 
     return (
@@ -58,12 +45,15 @@ function QuoteCard(props) {
             <p className="quote">❝ {props.quote.quote}❞</p>
             <div className="info">
                 <cite className="author"><RecordVoiceOverIcon style={{marginRight: '6px'}} fontSize={"small"}/>{props.quote.author}</cite>
+                <a target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=${props.quote.permalink}`}>Share<ShareIcon style={{marginLeft: '6px'}} fontSize={"small"}/></a>
                 {props.match.path !== '/quote/:quoteId' &&
                 <NavLink to={`/quote/${props.quote.id}`}>permalink <LinkIcon style={{marginLeft: '6px'}} fontSize={"small"}/></NavLink>}
             </div>
             <div className="rating">
                 {!!props.user && <Rating
-                    name="rating"
+                    className="tooltip"
+                    data-tip="Your rating!"
+                    name={`rating for quote #${props.quote.id}`}
                     value={value}
                     onChange={(event, newValue) => { if (newValue) { createRating(newValue) }}}
                 /> }

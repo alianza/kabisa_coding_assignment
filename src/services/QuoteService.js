@@ -14,25 +14,25 @@ const QuoteService = {
     },
 
     getQuotes() {
-        return this.doLoad('/quotes.json').then(jsonData => {
+        return this.doLoad('quotes.json').then(jsonData => {
             return jsonData;
         }).catch(e => { console.log('Error', e) });
     },
 
     getPopularQuotes() {
-        return this.doLoad('/popular.json').then(jsonData => {
+        return this.doLoad('popular.json').then(jsonData => {
             return jsonData;
         }).catch(e => { console.log('Error', e) });
     },
 
     getQuote(quoteId) {
-        return this.doLoad(`/quotes/${quoteId}.json`).then(jsonData => {
+        return this.doLoad(`quotes/${quoteId}.json`).then(jsonData => {
             return jsonData;
         }).catch(e => { console.log('Error', e) });
     },
 
     getRandomQuote() {
-        return this.doLoad("/random.json").then(jsonData => {
+        return this.doLoad("random.json").then(jsonData => {
             return jsonData;
         }).catch(e => { console.log('Error', e) });
     },

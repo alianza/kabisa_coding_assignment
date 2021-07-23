@@ -13,14 +13,16 @@ function RefreshButton(props) {
         const circleSegment = new Segment(circlePath, '25%', '90%');
         const arrowSegment = new Segment(arrowPath, '25%', '75%');
 
-        let animating = false;
-        refreshButton.addEventListener('click', function(){
+        const listener = function(){
             if(!animating){
                 animating = true;
                 triggerAnimation();
-                props.onRefresh()
+                props.onRefresh();
             }
-        }, false);
+        }
+
+        let animating = false;
+        refreshButton.addEventListener('click', listener, false);
 
         function triggerAnimation(){
             circleSegment.draw('75%', '165%', 0.5, {circular: true, callback: function(){
@@ -39,7 +41,11 @@ function RefreshButton(props) {
                         }});
                 }});
         }
-    }, [])
+
+        return function cleanup() {
+            refreshButton.removeEventListener('click', listener)
+        }
+    }, [props])
 
     return (
         <>

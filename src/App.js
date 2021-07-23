@@ -10,6 +10,7 @@ import Footer from "./components/Footer/Footer";
 import Quote from "./components/Quote/Quote";
 import MyQuotes from "./components/MyQuotes/MyQuotes";
 import { Dialog, DialogTitle } from "@material-ui/core";
+import Popular from "./components/Popular/Popular";
 
 function App() {
     const [open, setOpen] = useState(false);
@@ -86,6 +87,9 @@ function App() {
 
                         <Route exact path={['/quotes']} render={({match}) =>
                             <MyQuotes user={user} match={match}/>}/>
+
+                        <Route exact path={['/popular']} render={({match}) =>
+                            <Popular user={user} match={match}/>}/>
 
                         <Route exact path={['/login', '/profile']} render={({match}) =>
                             <SignIn user={user} logOut={logOut} match={match}/>}/>

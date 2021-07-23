@@ -8,6 +8,8 @@ $header-height: 3em;
     --text-primary: #000;
     --text-secondary: #fff;
 
+    --link:  #aaa;
+
     --accent-0: #fff;
     --accent-1: #fafafa;
     --accent-2: #eaeaea;
@@ -24,6 +26,11 @@ $header-height: 3em;
     --primary: #2b2b2c;
     --secondary: #3f51b5;
 
+    --text-primary: #fff;
+    --text-secondary: #000;
+
+    --link:  #aaa;
+
     --accent-9: #fff;
     --accent-8: #fafafa;
     --accent-7: #eaeaea;
@@ -34,9 +41,6 @@ $header-height: 3em;
     --accent-2: #333333;
     --accent-1: #111111;
     --accent-0: #000;
-
-    --text-primary: #fff;
-    --text-secondary: #000;
 }
 
 body {
@@ -51,8 +55,15 @@ body {
 }
 
 a {
-    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    transition: text-decoration-color .35s ease-in-out;
     color: inherit;
+
+    &:hover {
+        transition: text-decoration-color .1s ease-in-out;
+        text-decoration-color: inherit;
+    }
 }
 
 #app {
@@ -89,7 +100,7 @@ a {
     & .content {
         margin-top: $header-height;
         transition: margin-left .5s;
-        padding: 1em 1em 11em;
+        padding: 1em 1em 9em;
 
         div .title {
             margin: 0 0 1em 0;
@@ -208,8 +219,9 @@ a {
     }
 
     .tooltip:hover::before {
-        opacity:1;
+        opacity: .95;
         bottom: 100%;
+        z-index: 5;
     }
 }
 

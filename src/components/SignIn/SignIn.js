@@ -21,16 +21,27 @@ const uiConfig = {
 
 function SignIn(props) {
     const [isSignedIn, setIsSignedIn] = useState(false); // Local signed-in state.
+    const [numberOfRatings, setNumberOfRatings] = useState(0); // Local signed-in state.
     const history = useHistory();
+    const currentUser = firebase.auth().currentUser;
 
-    // Listen to the Firebase Auth state and set the local state.
-    useEffect(() => {
+    useEffect(() => { // Listen to the Firebase Auth state and set the local state.
         const unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
             setIsSignedIn(!!user);
             if (user) { history.push('/profile'); }
         });
         return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
-    }, [history, firebase.auth().currentUser]);
+    }, [history, currentUser]);
+
+    useEffect(() => { // Get number of ratings for user
+        if (props?.user?.uid) {
+            const dbRefObject = firebase.database().ref(`userRatings/${props?.user?.uid}`)
+
+            dbRefObject.on('value', snapshot => {
+                setNumberOfRatings(snapshot.numChildren())
+            })
+        }
+    }, [props?.user?.uid])
 
     const logOut = () => {
         props.logOut();
@@ -58,6 +69,8 @@ function SignIn(props) {
                     <p>Creation date: <span>{props.user?.metadata.creationTime}!</span></p>
                     <hr/>
                     <p>Last sign on: <span>{props.user?.metadata.lastSignInTime}!</span></p>
+                    <hr/>
+                    <p>Number of ratings: <span>{numberOfRatings}!</span></p>
                     <hr/>
                     <button className="button" onClick={logOut}>Sign-out</button>
                 </>

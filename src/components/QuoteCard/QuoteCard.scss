@@ -21,14 +21,14 @@
     .info {
         display: flex;
         justify-content: space-between;
-
+        margin: 1em 0;
 
         .author {
             display: flex;
             align-items: center;
         }
 
-        a {
+        a, span {
             display: flex;
             align-items: center;
         }
@@ -38,6 +38,10 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+
+        .MuiRating-root:before {
+            font-size: medium;
+        }
     }
 
     .averageRating {
@@ -76,4 +80,15 @@
         box-sizing: border-box;
     }
 
+}
+
+@media only screen and (max-width: 400px) {
+    .quoteCard {
+        .info {
+            flex-direction: column;
+            align-items: center;
+            gap: .5em;
+            margin-bottom: .2em;
+        }
+    }
 }
