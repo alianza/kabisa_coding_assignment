@@ -1,0 +1,10 @@
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
+
+[[redirects]]
+from = "/quotes.stormconsultancy.co.uk/*"
+to = "http://webservices.nextbus.com/service/:splat"
+status = 200
+force = true
