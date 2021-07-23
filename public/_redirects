@@ -1,0 +1,3 @@
+# Netlify single page app url fix
+/*    /index.html   200
+/api/* http://quotes.stormconsultancy.co.uk/:splat 200!
