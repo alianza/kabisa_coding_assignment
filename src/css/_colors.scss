@@ -1,0 +1,41 @@
+:root {
+    --primary: #fff;
+    --secondary: #3f51b5;
+
+    --text-primary: #000;
+    --text-secondary: #fff;
+
+    --link: #aaa;
+
+    --accent-0: #fff;
+    --accent-1: #fafafa;
+    --accent-2: #eaeaea;
+    --accent-3: #999999;
+    --accent-4: #888888;
+    --accent-5: #666666;
+    --accent-6: #444444;
+    --accent-7: #333333;
+    --accent-8: #111111;
+    --accent-9: #000;
+}
+
+[data-theme='dark'] {
+    --primary: #2b2b2c;
+    --secondary: #3f51b5;
+
+    --text-primary: #fff;
+    --text-secondary: #000;
+
+    --link: #aaa;
+
+    --accent-9: #fff;
+    --accent-8: #fafafa;
+    --accent-7: #eaeaea;
+    --accent-6: #999999;
+    --accent-5: #888888;
+    --accent-4: #666666;
+    --accent-3: #444444;
+    --accent-2: #333333;
+    --accent-1: #111111;
+    --accent-0: #000;
+}
