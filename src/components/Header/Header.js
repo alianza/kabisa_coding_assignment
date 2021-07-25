@@ -1,5 +1,6 @@
 import './Header.scss'
 import { NavLink } from "react-router-dom";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 function Header(props) {
 
@@ -15,7 +16,7 @@ function Header(props) {
             </div>
             <div className="header-status">
                 {props.user ?
-                    <h3>logged in as: <NavLink to={'/profile'}>{props.user.displayName}</NavLink></h3> :
+                    <><h3>logged in as: </h3><NavLink to={'/profile'}><h3>{props.user.displayName}</h3><AccountCircleIcon/></NavLink></> :
                     <NavLink to={'/login'}><h3>Log-in</h3></NavLink>}
             </div>
         </div>

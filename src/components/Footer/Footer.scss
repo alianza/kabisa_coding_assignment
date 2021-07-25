@@ -11,4 +11,10 @@
     left: 0;
     right: 0;
     transition: margin-left .5s;
+    gap: 1em;
+
+    p {
+        flex-grow: 1;
+        flex-basis: 50%;
+    }
 }

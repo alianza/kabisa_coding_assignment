@@ -1,5 +1,4 @@
-$menu-size: 13em;
-$header-height: 3em;
+    @import 'sizes';
 
 :root {
     --primary: #fff;
@@ -8,7 +7,7 @@ $header-height: 3em;
     --text-primary: #000;
     --text-secondary: #fff;
 
-    --link:  #aaa;
+    --link: #aaa;
 
     --accent-0: #fff;
     --accent-1: #fafafa;
@@ -29,7 +28,7 @@ $header-height: 3em;
     --text-primary: #fff;
     --text-secondary: #000;
 
-    --link:  #aaa;
+    --link: #aaa;
 
     --accent-9: #fff;
     --accent-8: #fafafa;
@@ -108,7 +107,7 @@ a {
             display: inline-block;
 
             &:hover::before {
-                transition: opacity 1s ease-in, bottom .5s ease-in;
+                transition: opacity 1s ease-out, bottom .8s ease-out;
             }
 
             &::before {
@@ -210,36 +209,45 @@ a {
         }
     }
 
-    .tooltip::before {
-        content: attr(data-tip);
-        display: inline-block;
-        position: absolute;
-        bottom: 50%;
-        background: #000;
-        color: #FFF;
-        padding: .5em;
-        box-shadow: rgba(0, 0, 0, .2) 0 0 12px;
-        border-radius: 5px;
-        opacity: 0;
-        margin-bottom: .5em;
-        left: 50%;
-        transform: translateX(-50%);
-        max-width: 100%;
-        text-overflow: ellipsis;
-        transition: opacity .3s ease-in-out, bottom .3s ease-in-out;
-        overflow: hidden;
-        pointer-events: none;
-        font-size: medium;
-        z-index: 5;
-    }
+    .tooltip {
 
-    .tooltip:hover::before {
-        opacity: .95;
-        bottom: 100%;
+        &::before {
+            content: attr(data-tip);
+            display: inline-block;
+            position: absolute;
+            bottom: 0;
+            background: #000;
+            color: #FFF;
+            padding: .5em;
+            box-shadow: rgba(0, 0, 0, .2) 0 0 12px;
+            border-radius: 5px;
+            opacity: 0;
+            margin-bottom: .5em;
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 100%;
+            text-overflow: ellipsis;
+            transition: opacity .2s ease-in-out, bottom .5s ease-in-out;
+            overflow: hidden;
+            pointer-events: none;
+            font-size: medium;
+            z-index: 5;
+        }
+
+        &:focus::before {
+            outline: 0;
+            outline: transparent;
+        }
+
+        &:hover::before {
+            transition: opacity .5s ease-in-out, bottom .2s ease-in-out;
+            opacity: .95;
+            bottom: 100%;
+        }
     }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: $mobile_size) {
     #app {
         & .menu {
             &-close {
@@ -281,5 +289,15 @@ a {
     }
     100% {
         transform: rotate(360deg);
+    }
+}
+
+@media (hover: none) { // Match with touch devices
+    #app {
+
+        .tooltip:hover::before { // Avoid tooltips because of stickyness on touch devices
+            opacity: 0;
+            bottom: 0;
+        }
     }
 }

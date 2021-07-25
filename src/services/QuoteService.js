@@ -5,7 +5,7 @@ const QuoteService = {
 
     doLoad(url) { // Base method for doing http Get requests
         if (!this.baseUrl) {
-            if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+            if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname.includes('192.168.')) {
                      this.baseUrl = this.baseUrlDev;
             } else { this.baseUrl = this.baseUrlProd }
         }

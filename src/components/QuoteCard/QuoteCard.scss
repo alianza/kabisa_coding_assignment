@@ -1,3 +1,5 @@
+@import "../../sizes";
+
 .quoteCard {
     position: relative;
     border-radius: .2em;
@@ -82,7 +84,7 @@
 
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: $mobile_size) {
     .quoteCard {
         .info {
             flex-direction: column;
