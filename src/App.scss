@@ -1,4 +1,5 @@
-    @import 'sizes';
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import 'sizes';
 
 :root {
     --primary: #fff;
@@ -68,7 +69,7 @@ a, button.link {
 }
 
 #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
+    font-family: 'Poppins', sans-serif, Helvetica, Arial, sans-serif;
     position: relative;
     min-height: 100vh;
     margin-top: -$header-height;
@@ -101,7 +102,7 @@ a, button.link {
     & .content {
         margin-top: $header-height;
         transition: margin-left .5s;
-        padding: 1em 1em 9em;
+        padding: 1em 1em 8em;
 
         div .title {
             margin: 0 0 1em 0;
@@ -156,38 +157,6 @@ a, button.link {
 
         &:active {
             transform: scale(.95);
-        }
-    }
-
-    & #loader {
-        transition: visibility .5s, opacity .5s;
-        position: fixed;
-        left: 50%;
-        top: 0;
-        transform: translateX(-50%);
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, .5);
-        visibility: hidden;
-        opacity: 0;
-        z-index: 4;
-
-        &.active {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        & div {
-            border: 16px solid #f3f3f3;
-            border-radius: 50%;
-            border-top: 16px solid #3498db;
-            width: 120px;
-            height: 120px;
-            animation: spin 2s linear infinite;
-            position: relative;
-            top: 40%;
-            margin: 0 auto;
-            box-shadow: 0 0 12px 8px rgba(0, 0, 0, .2), inset 0 0 12px 8px rgba(0, 0, 0, .2);
         }
     }
 
@@ -246,9 +215,13 @@ a, button.link {
                 margin-left: 0;
             }
         }
-    }
-    .button {
-        width: 100%;
+        .button {
+            width: 100%;
+
+            &:hover {
+                transform: scale(1.05);
+            }
+        }
     }
 }
 
@@ -263,15 +236,6 @@ a, button.link {
 ::-webkit-scrollbar-thumb {
     background-color: #aaa;
     border-radius: 1em;
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
 }
 
 @media (hover: none) { // Match with touch devices

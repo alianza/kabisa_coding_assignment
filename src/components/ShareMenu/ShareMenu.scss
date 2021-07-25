@@ -1,0 +1,12 @@
+#share-menu {
+    background-color: red;
+    .MuiPaper-root {
+        color: var(--accent-9) !important;
+        background-color: red;
+    }
+
+    .MuiMenu-list {
+        background-color: var(--primary) !important;
+    }
+
+}

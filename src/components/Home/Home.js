@@ -1,4 +1,4 @@
-import './HomePage.scss'
+import './Home.scss'
 import React, { useEffect, useState } from "react";
 import quoteService from "../../services/QuoteService";
 import Loader from "../../lib/Loader";
@@ -7,7 +7,7 @@ import RefreshButton from "../RefreshButton/RefreshButton";
 import TimerOffIcon from '@material-ui/icons/TimerOff';
 import TimerIcon from '@material-ui/icons/Timer';
 
-function HomePage(props) {
+function Home(props) {
     const [quote, setQuote] = useState();
     const [slideshow, setSlideShow] = useState(false);
 
@@ -50,4 +50,4 @@ function HomePage(props) {
     );
 }
 
-export default HomePage;
+export default Home;

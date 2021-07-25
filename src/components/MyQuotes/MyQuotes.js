@@ -1,11 +1,11 @@
 import './MyCuotes.scss'
 import React, { useEffect, useState } from "react";
 import QuoteCard from "../QuoteCard/QuoteCard";
-import firebase from "firebase/app";
-import "firebase/database";
 import QuoteService from "../../services/QuoteService";
 import Loader from "../../lib/Loader";
 import { NavLink } from "react-router-dom";
+import FirebaseService from "../../services/FirebaseService";
+import BackToTopButton from "../ScrollToTopButton/ScrollToTopButton";
 
 function MyQuotes(props) {
     const [quoteRefList, setQuoteRefList] = useState([]);
@@ -14,27 +14,25 @@ function MyQuotes(props) {
 
     useEffect(() => {
         Loader.showLoader();
-        if (props?.user?.uid) {
-            const dbRefObject = firebase.database().ref(`userRatings/${props?.user?.uid}`)
+    }, [])
 
-            dbRefObject.on('value', snapshot => {
-                setNumberOfQuotes(snapshot.numChildren())
-                snapshot.forEach(quoteRating => {
-                    setQuoteRefList(prevQuoteRefs => [...prevQuoteRefs, quoteRating.val()])
-                })
-            })
+    useEffect(() => {
+        if (props?.user?.uid) {
+            FirebaseService.getMyQuotes(props.user, setNumberOfQuotes, setQuoteRefList);
         }
-    }, [props?.user?.uid])
+    }, [props?.user])
 
     useEffect(() => {
         if (quoteRefList?.length === numberOfQuotes) {
-            quoteRefList.forEach(quoteRef => {
+            quoteRefList.forEach((quoteRef, index) => {
                 QuoteService.getQuote(quoteRef.quoteId).then(quote => {
                     setQuoteList(prevQuotes => [...prevQuotes, quote])
+                    if (index >= numberOfQuotes - 1) {
+                        Loader.hideLoader();
+                    }
                 })
             });
         }
-        Loader.hideLoader()
     }, [quoteRefList, numberOfQuotes])
 
     return (
@@ -43,9 +41,10 @@ function MyQuotes(props) {
             {quoteList?.length ? quoteList.map(quote =>
                     (<QuoteCard key={quote.id} quote={quote} user={props.user} match={props.match}/>)
                 ) :
-            <div className="noQuotes">You have not rated any quotes yet... <br /> Rate some quotes via the <NavLink to={"/"}>homepage</NavLink></div>
+                <div className="noQuotes">You have not rated any quotes yet... <br/> Rate some quotes via the <NavLink
+                    to={"/"}>homepage</NavLink></div>
             }
-
+            <BackToTopButton/>
         </div>
     );
 }

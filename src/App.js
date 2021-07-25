@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import './App.scss';
 import Header from "./components/Header/Header";
-import Menu from "./components/menu/Menu";
+import Menu from "./components/Menu/Menu";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SignIn from "./components/SignIn/SignIn";
 import firebase from "firebase/app";
-import HomePage from "./components/Home/HomePage";
+import Home from "./components/Home/Home";
 import Footer from "./components/Footer/Footer";
 import Quote from "./components/Quote/Quote";
 import MyQuotes from "./components/MyQuotes/MyQuotes";
 import { Dialog, DialogTitle } from "@material-ui/core";
 import Popular from "./components/Popular/Popular";
+import Loader from "./components/Loader/Loader";
 
 function App() {
     const [open, setOpen] = useState(false);
@@ -71,7 +72,7 @@ function App() {
 
     return (
         <Router>
-            <div id="app" className="menu-active">
+            <div id="app">
 
                 <Header user={user} onMenuClick={toggleMenu} title={'Quoty'}/>
 
@@ -80,7 +81,7 @@ function App() {
                 <div className={'content'}>
                     <Switch>
                         <Route exact path={['/']} render={({match}) =>
-                            <HomePage user={user} match={match}/>}/>
+                            <Home user={user} match={match}/>}/>
 
                         <Route exact path={['/quote/:quoteId']} render={({match}) =>
                             <Quote user={user} match={match}/>}/>
@@ -100,9 +101,7 @@ function App() {
 
                 <Footer darkTheme={darkTheme} onThemeButtonClick={toggleTheme}/>
 
-                <div id="loader">
-                    <div/>
-                </div>
+                <Loader/>
 
                 <Dialog open={open}>
                     <DialogTitle id="alert-dialog-title">Successfully Signed out!</DialogTitle>

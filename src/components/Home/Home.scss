@@ -8,11 +8,12 @@
         display: flex;
         justify-content: space-between;
 
-        span {
+        span.tooltip {
             position: relative;
 
             &::before {
-                max-width: 200%;
+                max-width: unset !important;
+                left: 0 !important;
             }
         }
     }
