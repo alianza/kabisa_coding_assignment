@@ -5,8 +5,8 @@ import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import firebase from 'firebase/app';
-import 'firebase/auth';
 import 'firebase/database';
+import 'firebase/analytics';
 
 let firebaseConfig = {
     apiKey: "AIzaSyABvMNKLEoX1Z67xRgzFMQvQFIZ5wOkxy4",

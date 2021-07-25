@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import "./SignIn.scss"
-import firebase from 'firebase/app';
 import { useHistory } from "react-router-dom";
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
 // Configure FirebaseUI.
 const uiConfig = {

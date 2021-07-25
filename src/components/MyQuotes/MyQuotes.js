@@ -1,7 +1,8 @@
 import './MyCuotes.scss'
 import React, { useEffect, useState } from "react";
 import QuoteCard from "../QuoteCard/QuoteCard";
-import firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/database";
 import QuoteService from "../../services/QuoteService";
 import Loader from "../../lib/Loader";
 import { NavLink } from "react-router-dom";

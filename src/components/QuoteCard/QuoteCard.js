@@ -1,6 +1,7 @@
 import './QuoteCard.scss'
 import React, { useEffect, useState } from "react";
 import firebase from "firebase/app";
+import "firebase/database";
 import { NavLink } from "react-router-dom";
 import RecordVoiceOverIcon from "@material-ui/icons/RecordVoiceOver";
 import LinkIcon from "@material-ui/icons/Link";
