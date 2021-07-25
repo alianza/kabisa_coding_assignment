@@ -1,6 +1,5 @@
 import './Menu.scss'
 import { NavLink, useLocation } from "react-router-dom";
-import scrollToTop from "../../lib/ScrollToTop";
 
 function Menu(props) {
     const { pathname } = useLocation();
@@ -22,15 +21,15 @@ function Menu(props) {
             <div onClick={e => props.onMenuClick(e)} className="menu-close">✖</div>
             <h1>Menu</h1>
             <ul className="menu-top" onClick={() => closeMenuIfMobile()}>
-                <li><NavLink to={'/'} isActive={ (match) => pathname.includes('/page') || match.url === '/'} activeClassName={'active'} onClick={() => scrollToTop()}>Home</NavLink></li>
-                <li className="login-only"><NavLink to={'/popular'} isActive={() => pathname.includes('/popular')} activeClassName={'active'}>Popular Quotes</NavLink></li>
+                <li><NavLink to={'/'} isActive={ (match) => pathname.includes('/page') || match.url === '/'} activeClassName={'active'}>Home</NavLink></li>
+                <li><NavLink to={'/popular'} isActive={() => pathname.includes('/popular')} activeClassName={'active'}>Popular Quotes</NavLink></li>
                 {!props.user ?
-                <li className="logout-only"><NavLink to={'/login'} isActive={ () => pathname.includes('/login') } activeClassName={'active'}>Login</NavLink></li>
+                <li><NavLink to={'/login'} isActive={ () => pathname.includes('/login') } activeClassName={'active'}>Login</NavLink></li>
                     :
                 <>
-                    <li className="login-only"><NavLink to={'/profile'} isActive={() => pathname.includes('/profile')} activeClassName={'active'}>Profile</NavLink></li>
-                    <li className="login-only"><NavLink to={'/quotes'} isActive={() => pathname.includes('/quotes')} activeClassName={'active'}>My Quotes</NavLink></li>
-                    <li className="login-only"><NavLink to={'/'} activeClassName={'none'} onClick={() => props.logOut()}><span>Sign-Out</span></NavLink></li>
+                    <li><NavLink to={'/profile'} isActive={() => pathname.includes('/profile')} activeClassName={'active'}>Profile</NavLink></li>
+                    <li><NavLink to={'/quotes'} isActive={() => pathname.includes('/quotes')} activeClassName={'active'}>My Quotes</NavLink></li>
+                    <li><NavLink to={'/'} activeClassName={'none'} onClick={() => props.logOut()}><span>Sign-Out</span></NavLink></li>
                 </>
                 }
                 <li onClick={about}>About</li>

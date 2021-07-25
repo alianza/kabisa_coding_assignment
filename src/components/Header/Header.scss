@@ -34,6 +34,10 @@
         color: whitesmoke;
         white-space: nowrap;
 
+        div {
+            display: flex;
+        }
+
         h3 {
             display: flex;
             align-items: center;
@@ -79,9 +83,11 @@
 
 @media only screen and (max-width: $tablet_size) {
     .header {
-        &-status{
-            > h3 {
-                display: none !important;
+        &-status {
+            div {
+                > h3 {
+                    display: none !important;
+                }
             }
         }
     }
@@ -90,17 +96,16 @@
 @media only screen and (max-width: $mobile_size) {
     .header {
         &-status{
-            > h3 {
-                display: none !important;
-            }
-            a {
-                h3 {
-                    display: none;
-                }
+            div {
+                a {
+                    h3 {
+                        display: none;
+                    }
 
-                svg {
-                    display: block;
-                    align-self: center;
+                    svg {
+                        display: block;
+                        align-self: center;
+                    }
                 }
             }
         }
