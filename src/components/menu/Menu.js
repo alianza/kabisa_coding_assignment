@@ -30,7 +30,7 @@ function Menu(props) {
                 <>
                     <li className="login-only"><NavLink to={'/profile'} isActive={() => pathname.includes('/profile')} activeClassName={'active'}>Profile</NavLink></li>
                     <li className="login-only"><NavLink to={'/quotes'} isActive={() => pathname.includes('/quotes')} activeClassName={'active'}>My Quotes</NavLink></li>
-                    <li className="login-only"><span onClick={() => props.logOut()}>Sign-Out</span></li>
+                    <li className="login-only"><NavLink to={'/'} activeClassName={'none'} onClick={() => props.logOut()}><span>Sign-Out</span></NavLink></li>
                 </>
                 }
                 <li onClick={about}>About</li>
