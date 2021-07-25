@@ -53,11 +53,13 @@ body {
     }
 }
 
-a {
+a, button.link {
     text-decoration: underline;
     text-decoration-color: transparent;
     transition: text-decoration-color .35s ease-in-out;
     color: inherit;
+    border: none;
+    background-color: transparent;
 
     &:hover {
         transition: text-decoration-color .1s ease-in-out;

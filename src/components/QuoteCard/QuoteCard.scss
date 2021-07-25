@@ -16,10 +16,6 @@
         font-size: large;
     }
 
-    a:hover {
-        text-decoration: underline;
-    }
-
     .info {
         display: flex;
         justify-content: space-between;
@@ -30,9 +26,13 @@
             align-items: center;
         }
 
-        a, span {
+        a, button {
             display: flex;
             align-items: center;
+
+            &:hover {
+                cursor: pointer;
+            }
         }
     }
 
