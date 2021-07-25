@@ -3,4 +3,17 @@
     flex-direction: column;
     justify-content: space-between;
     transition: max-height 1s ease-in-out;
+
+    .top {
+        display: flex;
+        justify-content: space-between;
+
+        span {
+            position: relative;
+
+            &::before {
+                max-width: 200%;
+            }
+        }
+    }
 }

@@ -121,7 +121,7 @@ a, button.link {
         }
     }
 
-    & .button {
+    .button {
         transition: background-color .2s, color .2s, transform .1s;
         font-size: 16px;
         border: none;
@@ -141,41 +141,21 @@ a, button.link {
         &:active {
             transform: scale(.98);
         }
+    }
 
-        &-sort {
-            line-height: 2em;
-            font-weight: bold;
+    .svgButton {
+        transition: transform .2s ease-in-out;
+        width: 1.5em;
+        height: 1.5em;
+
+        &:hover {
             cursor: pointer;
-            padding: .2em .5em;
-            border-radius: .2em;
+            transition: transform .1s ease-in-out;
+            transform: scale(1.1);
         }
 
-        &-random {
-            position: fixed;
-            z-index: 5;
-            bottom: .8em;
-            right: .8em;
-            box-shadow: 0 0 12px rgba(0, 0, 0, .5);
-        }
-
-        &-catch {
-            position: fixed;
-            z-index: 5;
-            bottom: .8em;
-            left: .8em;
-            box-shadow: 0 0 12px rgba(0, 0, 0, .5);
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: 90%;
-            padding: 2.5em;
-        }
-
-        &-next {
-            float: right;
-        }
-
-        &-prev {
-            float: left;
+        &:active {
+            transform: scale(.95);
         }
     }
 

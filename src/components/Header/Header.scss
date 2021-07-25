@@ -52,19 +52,8 @@
 
             svg {
                 display: none;
-                transition: transform .2s ease-in-out;
                 width: 1.5em;
                 height: 1.5em;
-
-                &:hover {
-                    cursor: pointer;
-                    transition: transform .1s ease-in-out;
-                    transform: scale(1.1);
-                }
-
-                &:active {
-                    transform: scale(.95);
-                }
             }
         }
     }
