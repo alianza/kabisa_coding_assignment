@@ -7,8 +7,8 @@ import FirebaseService from "../../services/FirebaseService";
 import ShareIcon from '@material-ui/icons/Share';
 import LinkIcon from "@material-ui/icons/Link";
 import RecordVoiceOverIcon from "@material-ui/icons/RecordVoiceOver";
-import StarRating from "../StarRating/StarRating";
 import ShareMenu from "../ShareMenu/ShareMenu";
+import StarRating from "../StarRating/StarRating";
 
 function QuoteCard(props) {
     const [value, setValue] = useState(0);
@@ -67,7 +67,7 @@ function QuoteCard(props) {
                 </NavLink>}
             </div>
             <div className="rating">
-                {!!props.user && <StarRating quote={props.quote} value={value} onChange={(newValue) => { if (newValue) { createRating(newValue) } }}/>}
+                {!!props.user && <StarRating quote={props.quote} value={value} onChange={(event, newValue) => { if (newValue) { createRating(newValue) } }}/>}
                 <div className="averageRating">Average rating: <span
                     className="ratingValue">{Math.round(averageRating * 100) / 100 || 'Not yet rated'}</span>
                     {!!averageRating &&
