@@ -73,6 +73,7 @@ a, button.link {
 
             &:hover::before {
                 transition: opacity 1s ease-out, bottom .8s ease-out;
+                transition-delay: 1s
             }
 
             &::before {

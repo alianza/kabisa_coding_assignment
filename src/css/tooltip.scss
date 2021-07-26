@@ -30,6 +30,7 @@
 
     &:hover::before {
         transition: opacity .5s ease-in-out, bottom .2s ease-in-out;
+        transition-delay: 1s;
         opacity: .95;
         bottom: 100%;
     }
