@@ -49,7 +49,7 @@ function RefreshButton(props) {
 
     return (
         <>
-            <button className="refresh-icon tooltip" data-tip="New random quote!">
+            <button className="refresh-icon tooltip" data-tip="New random quote!" aria-label="New random quote!">
                 <svg viewBox="0 0 90 90">
                     <path className="circle-path" d="M 45 45 m 0 -30 a 30 30 0 1 1 0 60 a 30 30 0 1 1 0 -60"/>
                 </svg>
