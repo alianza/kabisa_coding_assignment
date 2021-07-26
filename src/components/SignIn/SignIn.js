@@ -52,7 +52,7 @@ function SignIn(props) {
     if (!isSignedIn) {
         return (
             <div className="signIn">
-                <h1 className="title">Login/Signup</h1>
+                <h1 data-tip="Log in to vote on quotes" className="title tooltip">Login/Signup</h1>
                 <p>Please sign-in:</p>
                 <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()}/>
             </div>

@@ -44,7 +44,7 @@ function QuoteCard(props) {
                     <LinkIcon style={{marginLeft: '6px'}} fontSize={"small"}/>
                 </NavLink>}
             </div>
-            <div className="rating">
+            <div data-tip="Log in to vote" className={`rating ${!props.user && 'tooltip'}`}>
                 {!!props.user && <StarRating quoteId={props.quote.id} value={rating} onChange={(event, newValue) => { if (newValue) { createRating(newValue) } }}/>}
                 <div className="averageRating">Average rating: <span className="ratingValue">{Math.round(averageRating * 100) / 100 || 'Not yet rated'}</span>
                     {!!averageRating && <span className="ratingAmount">Based on {numberOfRatings} vote{numberOfRatings > 1 && 's'}!</span>}

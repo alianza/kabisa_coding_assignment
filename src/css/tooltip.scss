@@ -13,13 +13,14 @@
         margin-bottom: .5em;
         left: 50%;
         transform: translateX(-50%);
-        max-width: 100%;
+        max-width: 200%;
         text-overflow: ellipsis;
         transition: opacity .2s ease-in-out, bottom .5s ease-in-out;
         overflow: hidden;
         pointer-events: none;
         font-size: medium;
         z-index: 5;
+        white-space: nowrap;
     }
 
     &:focus::before {
