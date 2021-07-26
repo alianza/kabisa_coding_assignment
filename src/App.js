@@ -18,28 +18,27 @@ function App() {
     const [darkTheme, setDarkTheme] = useState(false);
     const [user, setUser] = useState();
 
-    // Listen to the Firebase Auth state and set the local state.
-    useEffect(() => {
+    useEffect(() => { // Listen to the Firebase Auth state and set the local state.
         const unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => { setUser(user) });
         return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
     });
 
-    useEffect(() => {
-        // console.log('darkTheme', darkTheme)
+    useEffect(() => { // Set dark theme attribute
         if (darkTheme) { document.body.dataset.theme = 'dark' }
         else { document.body.dataset.theme = '' }
     }, [darkTheme])
 
-    useEffect(() => {
+    useEffect(() => { // Listen for prefers-color-scheme css media query and window resize events
         const matchDarkMedia = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
-        matchDarkMedia.addEventListener('change', darkModeListener)
+        matchDarkMedia.addEventListener('change', onColorSchemeChange);
 
-        function darkModeListener(e) {
-            if (e.matches) { setDarkTheme(true) } // Prefers dark mode
-            else { setDarkTheme(false) }
+        window.addEventListener("resize", onResize);
+        onResize();
+
+        return function cleanup() {
+            matchDarkMedia.removeEventListener('change', onColorSchemeChange);
+            window.removeEventListener("resize", onResize);
         }
-
-        return function cleanup() { matchDarkMedia.removeEventListener('change', darkModeListener) }
     }, [])
 
     const toggleMenu = () => { document.getElementById("app").classList.toggle("menu-active") }
@@ -54,6 +53,11 @@ function App() {
         }
     }
 
+    const onColorSchemeChange = (e) => {
+        if (e.matches) { setDarkTheme(true) } // Prefers dark mode
+        else { setDarkTheme(false) } // Prefers light
+    }
+
     const logOut = () => {
         setOpen(true)
         firebase.auth().signOut().then(() => {
@@ -62,13 +66,6 @@ function App() {
             }, 1500);
         })
     }
-
-    useEffect(() => {
-        window.addEventListener("resize", onResize);
-        onResize();
-
-        return function cleanup() { window.removeEventListener("resize", onResize) };
-    }, [])
 
     return (
         <Router>

@@ -4,25 +4,22 @@ import { useHistory } from "react-router-dom";
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import FirebaseService from "../../services/FirebaseService";
 
-// Configure FirebaseUI.
-const uiConfig = {
-    // Popup signin flow rather than redirect flow.
-    signInFlow: 'popup',
-    // We will display Google and Facebook as auth providers.
+const uiConfig = { // Configure FirebaseUI.
+    signInFlow: 'popup', // Popup signin flow rather than redirect flow.
     signInOptions: [
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     ],
-    callbacks: {
-        // Avoid redirects after sign-in.
+    callbacks: { // Avoid redirects after sign-in.
         signInSuccessWithAuthResult: () => false,
     },
 };
 
 function SignIn(props) {
     const [isSignedIn, setIsSignedIn] = useState(false); // Local signed-in state.
-    const [numberOfRatings, setNumberOfRatings] = useState(0); // Local signed-in state.
+    const [numberOfRatings, setNumberOfRatings] = useState(0);
     const history = useHistory();
     const currentUser = firebase.auth().currentUser;
 
@@ -34,14 +31,8 @@ function SignIn(props) {
         return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
     }, [history, currentUser]);
 
-    useEffect(() => { // Get number of ratings for user
-        if (props?.user?.uid) {
-            const dbRefObject = firebase.database().ref(`userRatings/${props?.user?.uid}`)
-
-            dbRefObject.on('value', snapshot => {
-                setNumberOfRatings(snapshot.numChildren())
-            })
-        }
+    useEffect(() => { // Get number of ratings for current user
+        FirebaseService.getNumberOrRatings(props?.user?.uid, setNumberOfRatings);
     }, [props?.user?.uid])
 
     const logOut = () => {

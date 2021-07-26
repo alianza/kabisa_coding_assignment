@@ -9,7 +9,7 @@ function Quote(props) {
     const [quote, setQuote] = useState();
     const shareUrl = `https://${window.location.host}/quote/${quote?.id}`
 
-    useEffect(() => {
+    useEffect(() => { // Initial data fetch
         Loader.showLoader();
         quoteService.getQuote(props.match.params.quoteId).then(quote => {
             setQuote(quote)

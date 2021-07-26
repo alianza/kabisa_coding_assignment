@@ -11,7 +11,7 @@ function Home(props) {
     const [quote, setQuote] = useState();
     const [slideshow, setSlideShow] = useState(false);
 
-    useEffect(() => {
+    useEffect(() => { // Start slideshow timer
         let timer;
         if (slideshow) {
             timer = setTimeout(() => {
@@ -22,7 +22,7 @@ function Home(props) {
         return function cleanup () { clearTimeout(timer); }
     }, [slideshow])
 
-    useEffect(() => {
+    useEffect(() => { // Initial data fetch
         fetchRandomQuote()
     }, [])
 

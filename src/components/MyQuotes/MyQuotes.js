@@ -16,13 +16,11 @@ function MyQuotes(props) {
         Loader.showLoader();
     }, [])
 
-    useEffect(() => {
-        if (props?.user?.uid) {
-            FirebaseService.getMyQuotes(props.user, setNumberOfQuotes, setQuoteRefList);
-        }
-    }, [props?.user])
+    useEffect(() => { // Initial data fetch
+        FirebaseService.getMyQuotes(props.user, setNumberOfQuotes, setQuoteRefList);
+    },  [props?.user])
 
-    useEffect(() => {
+    useEffect(() => { // Iterate through Quote references and retrieve Quotes
         if (quoteRefList?.length === numberOfQuotes) {
             quoteRefList.forEach((quoteRef, index) => {
                 QuoteService.getQuote(quoteRef.quoteId).then(quote => {

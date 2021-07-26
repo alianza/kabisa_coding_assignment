@@ -8,7 +8,7 @@ import ScrollToTopButton from "../ScrollToTopButton/ScrollToTopButton";
 function Popular(props) {
     const [quoteList, setQuoteList] = useState([]);
 
-    useEffect(() => {
+    useEffect(() => { // Initial data fetch
         fetchPopularQuotes()
     }, [])
 

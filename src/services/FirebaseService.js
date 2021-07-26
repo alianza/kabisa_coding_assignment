@@ -31,6 +31,14 @@ const FirebaseService = {
         })
     },
 
+    getNumberOrRatings(userId, setNumberOfRatings) {
+        const dbRefObject = firebase.database().ref(`userRatings/${userId}`)
+
+        dbRefObject.on('value', snapshot => {
+            setNumberOfRatings(snapshot.numChildren())
+        })
+    },
+
     addRating(newValue, quoteId, userId) {
         const quoteRatingRef = firebase.database().ref('quoteRatings').child(quoteId)
         const userRatingsRef = firebase.database().ref('userRatings').child(userId)

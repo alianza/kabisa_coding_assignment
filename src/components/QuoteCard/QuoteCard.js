@@ -12,18 +12,18 @@ function QuoteCard(props) {
     const [rating, setRating] = useState(0);
     const [averageRating, setAverageRating] = useState(0);
     const [numberOfRatings, setNumberOfRatings] = useState(0);
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
     const shareUrl = `https://${window.location.host}/quote/${props.quote.id}`
 
-    const handleClick = (event) => {
+    const openShareMenu = (event) => {
         setAnchorEl(event.currentTarget);
     };
 
-    const handleClose = () => {
+    const closeShareMenu = () => {
         setAnchorEl(null);
     };
 
-    useEffect(() => {
+    useEffect(() => { //
         FirebaseService.getQuoteRatings(props.quote, props.user, setRating, setAverageRating, setNumberOfRatings);
     }, [props.quote, props?.user] )
 
@@ -39,7 +39,7 @@ function QuoteCard(props) {
                 <cite className="author">
                     <RecordVoiceOverIcon style={{marginRight: '6px'}} fontSize={"small"}/>{props.quote.author}
                 </cite>
-                <button className="link" onClick={handleClick}>Share<ShareIcon style={{marginLeft: '6px'}} fontSize={"small"}/></button>
+                <button className="link" onClick={openShareMenu}>Share<ShareIcon style={{marginLeft: '6px'}} fontSize={"small"}/></button>
                 {props.match.path !== '/quote/:quoteId' && <NavLink to={`/quote/${props.quote.id}`}>permalink
                     <LinkIcon style={{marginLeft: '6px'}} fontSize={"small"}/>
                 </NavLink>}
@@ -50,7 +50,7 @@ function QuoteCard(props) {
                     {!!averageRating && <span className="ratingAmount">Based on {numberOfRatings} vote{numberOfRatings > 1 && 's'}!</span>}
                 </div>
             </div>
-            <ShareMenu anchorEl={anchorEl} onClose={handleClose} urlToShare={shareUrl} quote={props.quote}/>
+            <ShareMenu anchorEl={anchorEl} onClose={closeShareMenu} urlToShare={shareUrl} quote={props.quote}/>
         </blockquote>
     );
 }
