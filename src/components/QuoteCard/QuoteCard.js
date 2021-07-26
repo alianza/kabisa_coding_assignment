@@ -23,7 +23,8 @@ function QuoteCard(props) {
         setAnchorEl(null);
     };
 
-    useEffect(() => { //
+    useEffect(() => { // Initial data fetch
+        setRating(0) // Reset rating every time
         FirebaseService.getQuoteRatings(props.quote, props.user, setRating, setAverageRating, setNumberOfRatings);
     }, [props.quote, props?.user] )
 
