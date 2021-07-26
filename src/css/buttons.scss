@@ -4,14 +4,14 @@
     border: none;
     cursor: pointer;
     text-align: center;
-    background-color: #f1f1f1;
-    color: black;
+    background-color: var(--accent-2);
+    color: var(--text-primary);
     padding: 16px 30px;
     border-radius: 5px;
 
     &:hover {
-        background-color: #222;
-        color: white;
+        background-color: var(--accent-7);
+        color: var(--accent-1);
         transform: scale(1.1);
     }
 
