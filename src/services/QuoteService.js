@@ -1,5 +1,5 @@
 const QuoteService = {
-    baseUrlProd: "/feed", // Redirected to http://quotes.stormconsultancy.co.uk/:splat by netlify according to netlify.toml file
+    baseUrlProd: "/api", // Redirected to http://quotes.stormconsultancy.co.uk/:splat by netlify according to netlify.toml file
     baseUrlDev: "http://quotes.stormconsultancy.co.uk",
     baseUrl: '',
 
