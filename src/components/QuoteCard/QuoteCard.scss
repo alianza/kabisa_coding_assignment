@@ -42,6 +42,10 @@
         align-items: center;
         position: relative;
 
+        .ratingDate {
+            margin-bottom: .2em;
+        }
+
         .MuiRating-root:before {
             font-size: medium;
         }
