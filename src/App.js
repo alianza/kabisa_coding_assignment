@@ -15,10 +15,13 @@ import Loader from "./components/Loader/Loader";
 import useTheme from "./lib/theme";
 import { useEventListeners } from "./lib/eventListeners";
 import FirebaseService from "./services/FirebaseService";
+import localStorageService from "./services/localStorageService";
+
+const darkThemeKey = 'darkTheme'
 
 function App() {
     const [open, setOpenLogoutDialog] = useState(false);
-    const [darkTheme, setDarkTheme] = useState(false);
+    const [darkTheme, setDarkTheme] = useState(localStorageService.getValue(darkThemeKey));
     const [user, setUser] = useState();
 
     useEffect(() => { // Listen to the Firebase Auth state and set the local state.
@@ -32,7 +35,7 @@ function App() {
 
     const toggleMenu = () => { document.getElementById("app").classList.toggle("menu-active") }
 
-    const toggleTheme = () => { setDarkTheme(prevTheme => !prevTheme) }
+    const toggleTheme = () => { localStorageService.setKeyValue(darkThemeKey, !darkTheme); setDarkTheme(prevTheme => !prevTheme) }
 
     const logOut = () => {
         FirebaseService.logout().then(() => {
