@@ -12,13 +12,13 @@ function MyQuotes(props) {
     const [quoteList, setQuoteList] = useState([]);
     const [numberOfQuotes, setNumberOfQuotes] = useState(0);
 
-    useEffect(() => {
-        Loader.showLoader();
-    }, [])
-
     useEffect(() => { // Initial data fetch
-        FirebaseService.getMyQuotes(props.user, setNumberOfQuotes, setQuoteRefList);
-    },  [props?.user])
+        FirebaseService.getMyQuotes(props.user).then(({numberOfQuotes, quoteRefList}) => {
+            if (numberOfQuotes === 0) { Loader.hideLoader() } else { Loader.showLoader() }
+            setNumberOfQuotes(numberOfQuotes);
+            setQuoteRefList(quoteRefList);
+        })
+    }, [props?.user])
 
     useEffect(() => { // Iterate through Quote references and retrieve Quotes
         if (quoteRefList?.length && quoteRefList?.length === numberOfQuotes) {
@@ -30,17 +30,18 @@ function MyQuotes(props) {
                     }
                 })
             });
-        } else { Loader.hideLoader() } // No quotes
+        }
     }, [quoteRefList, numberOfQuotes])
 
     return (
         <div className="quotes">
             <h1 className="title tooltip" data-tip="All quotes you voted for">My Quotes</h1>
             {quoteList?.length ? quoteList.map(quote =>
-                    (<QuoteCard key={quote.id} quote={quote} user={props.user} match={props.match}/>)
+                <QuoteCard key={quote.id} quote={quote} user={props.user} match={props.match}/>
                 ) :
-                <div className="noQuotes">You have not rated any quotes yet... <br/> Rate some quotes via the <NavLink
-                    to={"/"}>homepage</NavLink></div>
+                <div className="noQuotes">You have not rated any quotes yet... <br/> Rate some quotes via the&nbsp;
+                    <NavLink to={"/"}>homepage.</NavLink>
+                </div>
             }
             <BackToTopButton/>
         </div>

@@ -18,15 +18,20 @@ const FirebaseService = {
         })
     },
 
-    getMyQuotes(user, setNumberOfQuotes, setQuoteRefList) {
+    getMyQuotes(user): Promise {
         const dbRefObject = firebase.database().ref(`userRatings/${user?.uid}`)
 
-        dbRefObject.on('value', snapshot => {
-            setNumberOfQuotes(snapshot.numChildren())
-            snapshot.forEach(quoteRating => {
-                setQuoteRefList(prevQuoteRefs => [...prevQuoteRefs, quoteRating.val()])
+        return new Promise((resolve => {
+            let numberOfQuotes;
+            const quoteRefList = [];
+            dbRefObject.on('value', snapshot => {
+                numberOfQuotes = snapshot.numChildren();
+                snapshot.forEach(quoteRating => {
+                    quoteRefList.push(quoteRating.val())
+                })
+                resolve({numberOfQuotes, quoteRefList});
             })
-        })
+        }))
     },
 
     getNumberOrRatings(userId, setNumberOfRatings) {
