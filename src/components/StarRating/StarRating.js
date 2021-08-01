@@ -6,7 +6,7 @@ function StarRating(props: { quoteId: number, value: number, onChange: ((Event) 
         className="tooltip"
         data-tip="Your rating!"
         name={`rating for quote #${props.quoteId}`}
-        value={props.value}
+        value={props.value || 0}
         onChange={props.onChange}
     />;
 }
