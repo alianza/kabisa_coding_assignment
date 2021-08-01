@@ -35,10 +35,11 @@ function Quote(props) {
                         <LinkIcon/>
                     </button>
                 </> :
-                <div>No quote with id <b>'{props.match.params.quoteId}'</b> found!&nbsp;
-                    <button data-tip="Go back" className="button back tooltip" onClick={history.goBack}>
-                    <ArrowBackIcon/>
-                </button></div> }
+                <>
+                <div>No quote with id <b>'{props.match.params.quoteId}'</b> found!</div>
+                <button data-tip="Go back" className="button tooltip" onClick={history.goBack}>
+                <ArrowBackIcon/>
+                </button></>}
         </div>
     );
 }
