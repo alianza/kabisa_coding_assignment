@@ -12,59 +12,36 @@ import MyQuotes from "./components/MyQuotes/MyQuotes";
 import { Dialog, DialogTitle } from "@material-ui/core";
 import Popular from "./components/Popular/Popular";
 import Loader from "./components/Loader/Loader";
+import useTheme from "./lib/theme";
+import { useEventListeners } from "./lib/eventListeners";
+import FirebaseService from "./services/FirebaseService";
 
 function App() {
-    const [open, setOpen] = useState(false);
+    const [open, setOpenLogoutDialog] = useState(false);
     const [darkTheme, setDarkTheme] = useState(false);
     const [user, setUser] = useState();
 
     useEffect(() => { // Listen to the Firebase Auth state and set the local state.
         const unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => { setUser(user) });
         return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
-    });
+    }, []);
 
-    useEffect(() => { // Set dark theme attribute
-        if (darkTheme) { document.body.dataset.theme = 'dark' }
-        else { document.body.dataset.theme = '' }
-    }, [darkTheme])
+    useTheme(darkTheme);
 
-    useEffect(() => { // Listen for prefers-color-scheme css media query and window resize events
-        const matchDarkMedia = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
-        matchDarkMedia.addEventListener('change', onColorSchemeChange);
-
-        window.addEventListener("resize", onResize);
-        onResize();
-
-        return function cleanup() {
-            matchDarkMedia.removeEventListener('change', onColorSchemeChange);
-            window.removeEventListener("resize", onResize);
-        }
-    }, [])
+    useEventListeners();
 
     const toggleMenu = () => { document.getElementById("app").classList.toggle("menu-active") }
 
     const toggleTheme = () => { setDarkTheme(prevTheme => !prevTheme) }
 
-    const onResize = () => {
-        if (window.innerWidth < 600) {
-            document.getElementById('app').classList.remove('menu-active');
-        } else if (window.innerWidth > 900) {
-            document.getElementById('app').classList.add('menu-active');
-        }
-    }
-
-    const onColorSchemeChange = (e) => {
-        if (e.matches) { setDarkTheme(true) } // Prefers dark mode
-        else { setDarkTheme(false) } // Prefers light
-    }
-
     const logOut = () => {
-        setOpen(true)
-        firebase.auth().signOut().then(() => {
-            setTimeout(() => {
-                setOpen(false)
-            }, 1500);
-        })
+        FirebaseService.logout().then(() => {
+            setOpenLogoutDialog(true)
+                setTimeout(() => {
+                    setOpenLogoutDialog(false)
+                }, 1500);
+            }
+        );
     }
 
     return (
@@ -101,7 +78,7 @@ function App() {
                 <Loader/>
 
                 <Dialog open={open}>
-                    <DialogTitle id="alert-dialog-title">Successfully Signed out!</DialogTitle>
+                    <DialogTitle id="sign-out-dialog">Successfully Signed out!</DialogTitle>
                 </Dialog>
 
             </div>
