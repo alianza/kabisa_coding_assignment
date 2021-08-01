@@ -1,9 +1,9 @@
 import './Popular.scss'
 import React, { useEffect, useState } from "react";
-import quoteService from "../../services/QuoteService";
-import Loader from "../../lib/Loader";
-import QuoteCard from "../QuoteCard/QuoteCard";
-import ScrollToTopButton from "../ScrollToTopButton/ScrollToTopButton";
+import quoteService from "../../../services/QuoteService";
+import Loader from "../../../lib/Loader";
+import QuoteCard from "../../QuoteCard/QuoteCard";
+import ScrollToTopButton from "../../Buttons/ScrollToTopButton/ScrollToTopButton";
 
 function Popular(props) {
     const [quoteList, setQuoteList] = useState([]);

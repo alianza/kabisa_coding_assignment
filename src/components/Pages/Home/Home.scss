@@ -10,11 +10,22 @@
 
         span.tooltip {
             position: relative;
+            z-index: 2;
 
             &::before {
                 max-width: unset !important;
                 left: -2em !important;
                 line-height: 1.2em;
+            }
+
+            &::after {
+                position: absolute;
+                content: attr(data-progress);;
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: 0;
+                font-size: xxx-large;
+                pointer-events: none;
             }
         }
     }

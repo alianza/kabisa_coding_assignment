@@ -1,8 +1,8 @@
 import './Quote.scss'
 import React, { useEffect, useState } from "react";
-import quoteService from "../../services/QuoteService";
-import Loader from "../../lib/Loader";
-import QuoteCard from "../QuoteCard/QuoteCard";
+import quoteService from "../../../services/QuoteService";
+import Loader from "../../../lib/Loader";
+import QuoteCard from "../../QuoteCard/QuoteCard";
 import { useHistory } from "react-router-dom";
 import LinkIcon from '@material-ui/icons/Link';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';

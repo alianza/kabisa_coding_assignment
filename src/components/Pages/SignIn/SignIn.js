@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import FirebaseService from "../../services/FirebaseService";
+import FirebaseService from "../../../services/FirebaseService";
 
 const uiConfig = { // Configure FirebaseUI.
     signInFlow: 'popup', // Popup signin flow rather than redirect flow.

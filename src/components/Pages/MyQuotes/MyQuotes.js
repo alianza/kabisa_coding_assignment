@@ -1,11 +1,11 @@
 import './MyCuotes.scss'
 import React, { useEffect, useState } from "react";
-import QuoteCard from "../QuoteCard/QuoteCard";
-import QuoteService from "../../services/QuoteService";
-import Loader from "../../lib/Loader";
+import QuoteCard from "../../QuoteCard/QuoteCard";
+import QuoteService from "../../../services/QuoteService";
+import Loader from "../../../lib/Loader";
 import { NavLink } from "react-router-dom";
-import FirebaseService from "../../services/FirebaseService";
-import BackToTopButton from "../ScrollToTopButton/ScrollToTopButton";
+import FirebaseService from "../../../services/FirebaseService";
+import BackToTopButton from "../../Buttons/ScrollToTopButton/ScrollToTopButton";
 
 function MyQuotes(props) {
     const [quoteRefList, setQuoteRefList] = useState([])
@@ -42,7 +42,7 @@ function MyQuotes(props) {
                     <NavLink to={"/"}>homepage.</NavLink>
                 </div>
             }
-            <BackToTopButton/>
+            {!!quoteList?.length && <BackToTopButton/>}
         </div>
     );
 }

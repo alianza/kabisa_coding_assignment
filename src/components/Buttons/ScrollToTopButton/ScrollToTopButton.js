@@ -1,4 +1,4 @@
-import scrollToTop from "../../lib/ScrollToTop";
+import scrollToTop from "../../../lib/ScrollToTop";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import React from "react";
 import './ScrollToTopButton.scss'
