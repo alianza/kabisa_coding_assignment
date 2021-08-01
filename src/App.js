@@ -20,18 +20,18 @@ import localStorageService from "./services/localStorageService";
 const darkThemeKey = 'darkTheme'
 
 function App() {
-    const [open, setOpenLogoutDialog] = useState(false);
-    const [darkTheme, setDarkTheme] = useState(localStorageService.getValue(darkThemeKey));
-    const [user, setUser] = useState();
+    const [open, setOpenLogoutDialog] = useState(false)
+    const [darkTheme, setDarkTheme] = useState(localStorageService.getValue(darkThemeKey))
+    const [user, setUser] = useState()
 
     useEffect(() => { // Listen to the Firebase Auth state and set the local state.
-        const unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => { setUser(user) });
-        return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
-    }, []);
+        const unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => { setUser(user) })
+        return () => unregisterAuthObserver() // Make sure we un-register Firebase observers when the component unmounts.
+    }, [])
 
-    useTheme(darkTheme);
+    useTheme(darkTheme)
 
-    useEventListeners();
+    useEventListeners()
 
     const toggleMenu = () => { document.getElementById("app").classList.toggle("menu-active") }
 

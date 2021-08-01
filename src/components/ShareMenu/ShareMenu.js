@@ -6,7 +6,7 @@ import EmailIcon from "@material-ui/icons/Email";
 import React from "react";
 
 function ShareMenu(props: { anchorEl: unknown, onClose: () => void, urlToShare: string, quote: any }) {
-    return <Menu
+    return (<Menu
         id="share-menu"
         anchorEl={props.anchorEl}
         keepMounted
@@ -30,7 +30,7 @@ function ShareMenu(props: { anchorEl: unknown, onClose: () => void, urlToShare: 
                 <EmailIcon/>
             </a>
         </MenuItem>
-    </Menu>;
+    </Menu>)
 }
 
 export default ShareMenu;

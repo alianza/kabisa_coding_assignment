@@ -8,15 +8,15 @@ import FirebaseService from "../../services/FirebaseService";
 import BackToTopButton from "../ScrollToTopButton/ScrollToTopButton";
 
 function MyQuotes(props) {
-    const [quoteRefList, setQuoteRefList] = useState([]);
-    const [quoteList, setQuoteList] = useState([]);
-    const [numberOfQuotes, setNumberOfQuotes] = useState(0);
+    const [quoteRefList, setQuoteRefList] = useState([])
+    const [quoteList, setQuoteList] = useState([])
+    const [numberOfQuotes, setNumberOfQuotes] = useState(0)
 
     useEffect(() => { // Initial data fetch
         FirebaseService.getMyQuotes(props.user).then(({numberOfQuotes, quoteRefList}) => {
             if (numberOfQuotes === 0) { Loader.hideLoader() } else { Loader.showLoader() }
-            setNumberOfQuotes(numberOfQuotes);
-            setQuoteRefList(quoteRefList);
+            setNumberOfQuotes(numberOfQuotes)
+            setQuoteRefList(quoteRefList)
         })
     }, [props?.user])
 
@@ -26,9 +26,8 @@ function MyQuotes(props) {
                 QuoteService.getQuote(quoteRef.quoteId).then(quote => {
                     setQuoteList(prevQuotes => [...prevQuotes, quote])
                     if (index >= numberOfQuotes - 1) {
-                        Loader.hideLoader();
-                    }
-                })
+                        Loader.hideLoader()
+                    }})
             });
         }
     }, [quoteRefList, numberOfQuotes])

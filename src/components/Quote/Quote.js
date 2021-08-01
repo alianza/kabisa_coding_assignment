@@ -8,22 +8,22 @@ import LinkIcon from '@material-ui/icons/Link';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 function Quote(props) {
-    const [quote, setQuote] = useState();
-    const shareUrl = `https://${window.location.host}/quote/${quote?.id}`;
-    const history = useHistory();
+    const [quote, setQuote] = useState()
+    const shareUrl = `https://${window.location.host}/quote/${quote?.id}`
+    const history = useHistory()
 
     useEffect(() => { // Initial data fetch
-        Loader.showLoader();
+        Loader.showLoader()
         quoteService.getQuote(props.match.params.quoteId).then(quote => {
             setQuote(quote)
-            Loader.hideLoader();
+            Loader.hideLoader()
         })
     }, [props.match.params.quoteId])
 
     const copyQuoteUrl = () => {
         navigator.clipboard.writeText(shareUrl).then(function() {
             document.getElementById('copy').dataset.tip = 'Copied!'
-        }, function(err) { console.error('Async: Could not copy text: ', err); });
+        }, function(err) { console.error('Async: Could not copy text: ', err) })
     }
 
     return (

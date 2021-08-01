@@ -3,7 +3,7 @@ import "firebase/app";
 
 const FirebaseService = {
     getQuoteRatings(quote, user, setRating, setAverageRating, setNumberOfRatings) {
-        const dbRefObject = firebase.database().ref('quoteRatings').child(quote.id);
+        const dbRefObject = firebase.database().ref('quoteRatings').child(quote.id)
 
         dbRefObject.on('value', snapshot => {
             let averageRating = 0
@@ -22,10 +22,10 @@ const FirebaseService = {
         const dbRefObject = firebase.database().ref(`userRatings/${user?.uid}`)
 
         return new Promise((resolve => {
-            let numberOfQuotes;
-            const quoteRefList = [];
+            let numberOfQuotes
+            const quoteRefList = []
             dbRefObject.on('value', snapshot => {
-                numberOfQuotes = snapshot.numChildren();
+                numberOfQuotes = snapshot.numChildren()
                 snapshot.forEach(quoteRating => {
                     quoteRefList.push(quoteRating.val())
                 })

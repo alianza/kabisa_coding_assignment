@@ -9,23 +9,19 @@ import ShareMenu from "../ShareMenu/ShareMenu";
 import StarRating from "../StarRating/StarRating";
 
 function QuoteCard(props) {
-    const [rating, setRating] = useState({ rating: 0, timestamp: null });
-    const [averageRating, setAverageRating] = useState(0);
-    const [numberOfRatings, setNumberOfRatings] = useState(0);
-    const [anchorEl, setAnchorEl] = useState(null);
+    const [rating, setRating] = useState({ rating: 0, timestamp: null })
+    const [averageRating, setAverageRating] = useState(0)
+    const [numberOfRatings, setNumberOfRatings] = useState(0)
+    const [anchorEl, setAnchorEl] = useState(null)
     const shareUrl = `https://${window.location.host}/quote/${props.quote.id}`
 
-    const openShareMenu = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
+    const openShareMenu = (event) => { setAnchorEl(event.currentTarget) }
 
-    const closeShareMenu = () => {
-        setAnchorEl(null);
-    };
+    const closeShareMenu = () => { setAnchorEl(null) }
 
     useEffect(() => { // Initial data fetch
         setRating(0) // Reset rating every time
-        FirebaseService.getQuoteRatings(props.quote, props.user, setRating, setAverageRating, setNumberOfRatings);
+        FirebaseService.getQuoteRatings(props.quote, props.user, setRating, setAverageRating, setNumberOfRatings)
     }, [props.quote, props?.user] )
 
     const createRating = (rating) => {

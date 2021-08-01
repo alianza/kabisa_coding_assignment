@@ -6,40 +6,45 @@ import { elasticOut } from "d3-ease/src/elastic";
 function RefreshButton(props) {
 
     useEffect(() => {
-        const refreshButton = document.querySelector('.refresh-icon');
-        const circlePath = refreshButton.querySelector('.circle-path');
-        const arrowPath = refreshButton.querySelector('.arrow-path');
-        const arrowSvg = refreshButton.querySelector('.arrow-svg');
-        const circleSegment = new Segment(circlePath, '25%', '90%');
-        const arrowSegment = new Segment(arrowPath, '25%', '75%');
+        const refreshButton = document.querySelector('.refresh-icon')
+        const circlePath = refreshButton.querySelector('.circle-path')
+        const arrowPath = refreshButton.querySelector('.arrow-path')
+        const arrowSvg = refreshButton.querySelector('.arrow-svg')
+        const circleSegment = new Segment(circlePath, '25%', '90%')
+        const arrowSegment = new Segment(arrowPath, '25%', '75%')
 
         const listener = function(){
             if(!animating){
-                animating = true;
-                triggerAnimation();
-                props.onRefresh();
+                animating = true
+                triggerAnimation()
+                props.onRefresh()
             }
         }
 
-        let animating = false;
-        refreshButton.addEventListener('click', listener, false);
+        let animating = false
+        refreshButton.addEventListener('click', listener, false)
 
         function triggerAnimation(){
-            circleSegment.draw('75%', '165%', 0.5, {circular: true, callback: function(){
-                    circleSegment.draw('10%', '90%', 0.2, {circular: true, callback: function(){
-                            circleSegment.draw('25%', '90%', 1.5, {circular: true, easing: elasticOut.ease, callback: function(){
-                                }});
-                        }});
-                }});
+            circleSegment.draw('75%', '165%', 0.5, {circular: true, callback: () => {
+                    circleSegment.draw('10%', '90%', 0.2, {circular: true, callback: () => {
+                            circleSegment.draw('25%', '90%', 1.5, {circular: true, easing: elasticOut.ease, callback: () => {
+                                }
+                            })
+                        }
+                    })
+                }
+            })
 
             arrowSvg.setAttribute('class', 'arrow-svg arrow-animation');
 
-            arrowSegment.draw('50%', '50% + 0.01', 0.8, {callback: function(){
-                    arrowSegment.draw('25%', '75%', 1.4, {easing: elasticOut.ease, callback: function(){
-                            arrowSvg.setAttribute('class', 'arrow-svg');
-                            animating = false;
-                        }});
-                }});
+            arrowSegment.draw('50%', '50% + 0.01', 0.8, {callback: () => {
+                    arrowSegment.draw('25%', '75%', 1.4, {easing: elasticOut.ease, callback: () => {
+                            arrowSvg.setAttribute('class', 'arrow-svg')
+                            animating = false
+                        }
+                    })
+                }
+            })
         }
 
         return function cleanup() {

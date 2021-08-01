@@ -12,7 +12,7 @@ function Menu(props) {
 
     const closeMenuIfMobile = () => {
         if (window.innerWidth < 600) {
-            document.getElementById('app').classList.remove('menu-active');
+            document.getElementById('app').classList.remove('menu-active')
         }
     }
 

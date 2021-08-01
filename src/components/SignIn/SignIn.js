@@ -18,26 +18,26 @@ const uiConfig = { // Configure FirebaseUI.
 };
 
 function SignIn(props) {
-    const [isSignedIn, setIsSignedIn] = useState(false); // Local signed-in state.
-    const [numberOfRatings, setNumberOfRatings] = useState(0);
-    const history = useHistory();
-    const currentUser = firebase.auth().currentUser;
+    const [isSignedIn, setIsSignedIn] = useState(false) // Local signed-in state.
+    const [numberOfRatings, setNumberOfRatings] = useState(0)
+    const history = useHistory()
+    const currentUser = firebase.auth().currentUser
 
     useEffect(() => { // Listen to the Firebase Auth state and set the local state.
         const unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
-            setIsSignedIn(!!user);
-            if (user) { history.push('/profile'); }
-        });
-        return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
-    }, [history, currentUser]);
+            setIsSignedIn(!!user)
+            if (user) { history.push('/profile') }
+        })
+        return () => unregisterAuthObserver() // Make sure we un-register Firebase observers when the component unmounts.
+    }, [history, currentUser])
 
     useEffect(() => { // Get number of ratings for current user
-        FirebaseService.getNumberOrRatings(props?.user?.uid, setNumberOfRatings);
+        FirebaseService.getNumberOrRatings(props?.user?.uid, setNumberOfRatings)
     }, [props?.user?.uid])
 
     const logOut = () => {
-        props.logOut();
-        history.push('/login');
+        props.logOut()
+        history.push('/login')
     }
 
     if (!isSignedIn) {
@@ -47,7 +47,7 @@ function SignIn(props) {
                 <p>Please sign-in:</p>
                 <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()}/>
             </div>
-        );
+        )
     } else {
         return (
             <div className="signIn">
@@ -68,7 +68,7 @@ function SignIn(props) {
                 </>
                 }
             </div>
-        );
+        )
     }
 }
 

@@ -8,18 +8,18 @@ import TimerOffIcon from '@material-ui/icons/TimerOff';
 import TimerIcon from '@material-ui/icons/Timer';
 
 function Home(props) {
-    const [quote, setQuote] = useState();
-    const [slideshow, setSlideShow] = useState(false);
+    const [quote, setQuote] = useState()
+    const [slideshow, setSlideShow] = useState(false)
 
     useEffect(() => { // Start slideshow timer
-        let timer;
+        let timer
         if (slideshow) {
             timer = setTimeout(() => {
                 fetchRandomQuote()
             }, 8000);
         }
 
-        return function cleanup () { clearTimeout(timer); }
+        return function cleanup () { clearTimeout(timer) }
     }, [slideshow])
 
     useEffect(() => { // Initial data fetch
@@ -27,10 +27,10 @@ function Home(props) {
     }, [])
 
     const fetchRandomQuote = () => {
-        Loader.showLoader();
+        Loader.showLoader()
         quoteService.getRandomQuote().then(quote => {
             setQuote(quote)
-            Loader.hideLoader();
+            Loader.hideLoader()
         })
     }
 

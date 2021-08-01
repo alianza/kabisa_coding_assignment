@@ -8,10 +8,6 @@ body {
     margin: 0;
     overflow-x: hidden;
     color: var(--text-primary);
-
-    &.scroll_disabled {
-        overflow: hidden;
-    }
 }
 
 a, button.link {

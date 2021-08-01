@@ -13,10 +13,10 @@ function Popular(props) {
     }, [])
 
     const fetchPopularQuotes = () => {
-        Loader.showLoader();
+        Loader.showLoader()
         quoteService.getPopularQuotes().then(quotes => {
             setQuoteList(quotes)
-            Loader.hideLoader();
+            Loader.hideLoader()
         })
     }
 
