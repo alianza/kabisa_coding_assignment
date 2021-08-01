@@ -21,7 +21,7 @@ function MyQuotes(props) {
     },  [props?.user])
 
     useEffect(() => { // Iterate through Quote references and retrieve Quotes
-        if (quoteRefList?.length === numberOfQuotes) {
+        if (quoteRefList?.length && quoteRefList?.length === numberOfQuotes) {
             quoteRefList.forEach((quoteRef, index) => {
                 QuoteService.getQuote(quoteRef.quoteId).then(quote => {
                     setQuoteList(prevQuotes => [...prevQuotes, quote])
@@ -30,7 +30,7 @@ function MyQuotes(props) {
                     }
                 })
             });
-        }
+        } else { Loader.hideLoader() } // No quotes
     }, [quoteRefList, numberOfQuotes])
 
     return (
