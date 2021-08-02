@@ -16,8 +16,8 @@ function Header(props) {
             </div>
             <div className="header-status">
                 {props.user ?
-                    <div><h3>logged in as: </h3><NavLink aria-label="Profile" to={'/profile'}><h3>{props.user.displayName}</h3><AccountCircleIcon className="svgButton"/></NavLink></div> :
-                    <NavLink aria-label="Sign-in" to={'/login'}><h3>Log-in</h3></NavLink>}
+                    <div><h2>logged in as: </h2><NavLink aria-label="Profile" to={'/profile'}><h2>{props.user.displayName}</h2><AccountCircleIcon className="svgButton"/></NavLink></div> :
+                    <NavLink aria-label="Sign-in" to={'/login'}><h2>Log-in</h2></NavLink>}
             </div>
         </div>
     );

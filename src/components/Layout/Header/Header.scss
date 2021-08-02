@@ -38,18 +38,19 @@
             display: flex;
         }
 
-        h3 {
+        h2 {
             display: flex;
             align-items: center;
             gap: .2em;
             font-weight: lighter;
+            font-size: 1.2em;
         }
 
         a {
             display: flex;
             align-items: center;
 
-            h3 {
+            h2 {
                 margin-left: .2em;
                 font-weight: bold;
             }
@@ -85,7 +86,7 @@
     .header {
         &-status {
             div {
-                > h3 {
+                > h2 {
                     display: none !important;
                 }
             }
@@ -98,7 +99,7 @@
         &-status{
             div {
                 a {
-                    h3 {
+                    h2 {
                         display: none;
                     }
 
