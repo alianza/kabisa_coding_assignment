@@ -7,6 +7,7 @@ import LinkIcon from "@material-ui/icons/Link";
 import RecordVoiceOverIcon from "@material-ui/icons/RecordVoiceOver";
 import ShareMenu from "../ShareMenu/ShareMenu";
 import StarRating from "../StarRating/StarRating";
+import getLanguage from "../../lib/Language";
 
 function QuoteCard(props) {
     const [rating, setRating] = useState({ rating: 0, timestamp: null })
@@ -43,7 +44,7 @@ function QuoteCard(props) {
                 </NavLink>}
             </div>
                 <div data-tip={!props.user ? 'Log in to vote!' : 'Your rating!'} className="rating tooltip">
-                    {rating?.timestamp && <center className="ratingDate">Rated on: <b>{new Date(rating?.timestamp).toLocaleString('nl')}</b></center>}
+                    {rating?.timestamp && <center className="ratingDate">Rated on: <b>{new Date(rating?.timestamp).toLocaleString(getLanguage())}</b></center>}
                     {!!props.user && <StarRating quoteId={props.quote.id} value={rating?.rating} onChange={(event, newValue) => { createRating(newValue) }}/>}
                     <div className="averageRating">Average rating: <span className="ratingValue">{Math.round(averageRating * 100) / 100 || 'Not yet rated'}</span>
                     {!!averageRating && <span className="ratingAmount">Based on {numberOfRatings} vote{numberOfRatings > 1 && 's'}!</span>}

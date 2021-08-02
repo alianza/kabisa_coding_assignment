@@ -5,6 +5,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import FirebaseService from "../../../services/FirebaseService";
+import getLanguage from "../../../lib/Language";
 
 const uiConfig = { // Configure FirebaseUI.
     signInFlow: 'popup', // Popup signin flow rather than redirect flow.
@@ -58,9 +59,9 @@ function SignIn(props) {
                     <hr/>
                     <p>Email: <span>{props.user?.email}!</span></p>
                     <hr/>
-                    <p>Creation date: <span>{props.user?.metadata.creationTime}!</span></p>
+                    <p>Creation date: <span>{new Date(props.user?.metadata.creationTime).toLocaleString(getLanguage())}!</span></p>
                     <hr/>
-                    <p>Last sign on: <span>{props.user?.metadata.lastSignInTime}!</span></p>
+                    <p>Last sign on: <span>{new Date(props.user?.metadata.lastSignInTime).toLocaleString(getLanguage())}!</span></p>
                     <hr/>
                     <p>Number of ratings: <span>{numberOfRatings}!</span></p>
                     <hr/>
