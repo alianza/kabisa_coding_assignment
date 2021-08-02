@@ -12,8 +12,8 @@ import MyQuotes from "./components/Pages/MyQuotes/MyQuotes";
 import { Dialog, DialogTitle } from "@material-ui/core";
 import Popular from "./components/Pages/Popular/Popular";
 import Loader from "./components/Loader/Loader";
-import useTheme from "./lib/theme";
-import { useEventListeners } from "./lib/eventListeners";
+import useTheme from "./lib/Theme";
+import { useEventListeners } from "./lib/EventListeners";
 import FirebaseService from "./services/FirebaseService";
 import localStorageService from "./services/localStorageService";
 
