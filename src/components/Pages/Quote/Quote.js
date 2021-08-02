@@ -31,13 +31,13 @@ function Quote(props) {
             <h1 className="title">Quote #{props.match.params.quoteId}</h1>
             {quote ? <>
                     <QuoteCard match={props.match} user={props.user} quote={quote}/>
-                    <button data-tip="Copy quote url" id="copy" className="button tooltip" onClick={copyQuoteUrl}>
+                    <button data-tip="Copy quote url" aria-label="Copy quote url" id="copy" className="button tooltip" onClick={copyQuoteUrl}>
                         <LinkIcon/>
                     </button>
                 </> :
                 <>
                 <div>No quote with id <b>'{props.match.params.quoteId}'</b> found!</div>
-                <button data-tip="Go back" className="button tooltip" onClick={history.goBack}>
+                <button data-tip="Go back" aria-label="Go back" className="button tooltip" onClick={history.goBack}>
                 <ArrowBackIcon/>
                 </button></>}
         </div>
