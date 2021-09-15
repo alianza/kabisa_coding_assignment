@@ -10,7 +10,7 @@ import BackToTopButton from "../../Buttons/ScrollToTopButton/ScrollToTopButton";
 function MyQuotes(props) {
     const [quoteRefList, setQuoteRefList] = useState([])
     const [quoteList, setQuoteList] = useState([])
-    const [numberOfQuotes, setNumberOfQuotes] = useState(0)
+    const [numberOfQuotes, setNumberOfQuotes] = useState()
 
     useEffect(() => { // Initial data fetch
         FirebaseService.getMyQuotes(props.user).then(({numberOfQuotes, quoteRefList}) => {
@@ -21,7 +21,7 @@ function MyQuotes(props) {
     }, [props?.user])
 
     useEffect(() => { // Iterate through Quote references and retrieve Quotes
-        if (quoteRefList?.length && quoteRefList?.length === numberOfQuotes) {
+        if (quoteRefList?.length === numberOfQuotes) {
             quoteRefList.forEach((quoteRef, index) => {
                 QuoteService.getQuote(quoteRef.quoteId).then(quote => {
                     setQuoteList(prevQuotes => [...prevQuotes, quote])
@@ -35,7 +35,7 @@ function MyQuotes(props) {
     return (
         <div className="quotes">
             <h1 className="title tooltip" data-tip="All quotes you voted for">My Quotes</h1>
-            {quoteList?.length ? quoteList.map(quote =>
+            {quoteList?.length || numberOfQuotes !== 0 ? quoteList.map(quote =>
                 <QuoteCard key={quote.id} quote={quote} user={props.user} match={props.match}/>
                 ) :
                 <div className="noQuotes">You have not rated any quotes yet... <br/> Rate some quotes via the&nbsp;

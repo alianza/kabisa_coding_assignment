@@ -5,7 +5,7 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 import EmailIcon from "@material-ui/icons/Email";
 import React from "react";
 
-function ShareMenu(props: { anchorEl: unknown, onClose: () => void, urlToShare: string, quote: any }) {
+function ShareMenu(props: { anchorEl: any, onClose: () => void, urlToShare: string, quote: any }) {
     return (<Menu
         id="share-menu"
         anchorEl={props.anchorEl}

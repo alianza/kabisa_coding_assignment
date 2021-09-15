@@ -9,7 +9,6 @@ import SlideshowButton from "../../Buttons/SlideshowButton/SlideshowButton";
 function Home(props) {
     const [quote, setQuote] = useState()
 
-
     useEffect(() => { // Initial data fetch
         fetchRandomQuote()
     }, [])

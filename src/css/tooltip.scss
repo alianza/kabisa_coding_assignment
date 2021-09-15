@@ -35,3 +35,11 @@
         bottom: 100%;
     }
 }
+
+@media (hover: none) { // Match with touch devices
+    .tooltip:hover::before { // Avoid tooltips because of stickyness on touch devices
+        opacity: 0;
+        bottom: 0;
+    }
+}
+

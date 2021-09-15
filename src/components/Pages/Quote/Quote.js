@@ -15,31 +15,37 @@ function Quote(props) {
     useEffect(() => { // Initial data fetch
         Loader.showLoader()
         quoteService.getQuote(props.match.params.quoteId).then(quote => {
-            setQuote(quote)
+            setQuote(quote || null)
             Loader.hideLoader()
         })
     }, [props.match.params.quoteId])
 
     const copyQuoteUrl = () => {
-        navigator.clipboard.writeText(shareUrl).then(function() {
+        navigator.clipboard.writeText(shareUrl).then(() => {
             document.getElementById('copy').dataset.tip = 'Copied!'
-        }, function(err) { console.error('Async: Could not copy text: ', err) })
+        }, function (err) {
+            console.error('Async: Could not copy text: ', err)
+        })
     }
 
     return (
         <div className="quote">
             <h1 className="title">Quote #{props.match.params.quoteId}</h1>
-            {quote ? <>
-                    <QuoteCard match={props.match} user={props.user} quote={quote}/>
-                    <button data-tip="Copy quote url" aria-label="Copy quote url" id="copy" className="button tooltip" onClick={copyQuoteUrl}>
-                        <LinkIcon/>
-                    </button>
-                </> :
-                <>
+            {quote && <>
+                <QuoteCard match={props.match} user={props.user} quote={quote}/>
+                <button data-tip="Copy quote url" aria-label="Copy quote url" id="copy" className="button tooltip"
+                        onClick={copyQuoteUrl}>
+                    <LinkIcon/>
+                </button>
+            </>}
+            {quote === null &&
+            <>
                 <div>No quote with id <b>'{props.match.params.quoteId}'</b> found!</div>
                 <button data-tip="Go back" aria-label="Go back" className="button tooltip" onClick={history.goBack}>
-                <ArrowBackIcon/>
-                </button></>}
+                    <ArrowBackIcon/>
+                </button>
+            </>
+            }
         </div>
     );
 }

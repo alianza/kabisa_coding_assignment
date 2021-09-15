@@ -10,13 +10,3 @@
     background-color: #aaa;
     border-radius: 1em;
 }
-
-@media (hover: none) { // Match with touch devices
-    #app {
-
-        .tooltip:hover::before { // Avoid tooltips because of stickyness on touch devices
-            opacity: 0;
-            bottom: 0;
-        }
-    }
-}
