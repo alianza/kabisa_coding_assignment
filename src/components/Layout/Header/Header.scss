@@ -1,7 +1,7 @@
 @import 'src/css/sizes';
 
 #app.menu-active .header {
-    width: calc(100% - 13em);
+    width: calc(100% - #{$menu-size});
 }
 
 .header {
