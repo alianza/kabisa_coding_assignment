@@ -42,7 +42,7 @@
     "workbox-streams": "^5.1.3"
   },
   "devDependencies": {
-    "serve": "^12.0.0"
+    "serve": "^12.0.1"
   },
   "eslintConfig": {
     "extends": [
