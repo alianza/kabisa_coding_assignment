@@ -4,9 +4,9 @@ import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
-import firebase from 'firebase/app';
-import 'firebase/database';
-import 'firebase/analytics';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/database';
+import 'firebase/compat/analytics';
 
 let firebaseConfig = {
     apiKey: "AIzaSyABvMNKLEoX1Z67xRgzFMQvQFIZ5wOkxy4",
@@ -18,6 +18,7 @@ let firebaseConfig = {
     databaseURL: "https://kabisa-coding-assignment-jw-default-rtdb.europe-west1.firebasedatabase.app/",
     measurementId: "G-4L0QHDM97F"
 };
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig)
 firebase.database()

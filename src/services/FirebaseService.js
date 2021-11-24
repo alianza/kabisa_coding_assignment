@@ -1,5 +1,5 @@
-import firebase from "firebase/app";
-import "firebase/app";
+import firebase from "firebase/compat/app";
+import { getAuth } from "firebase/auth"
 
 const FirebaseService = {
     getQuoteRatings(quote, user, setRating, setAverageRating, setNumberOfRatings) {
@@ -66,7 +66,7 @@ const FirebaseService = {
     },
     logout(): Promise<Boolean> {
         return new Promise((resolve) => {
-            firebase.auth().signOut().then(() => { resolve(true) })
+            getAuth().signOut().then(() => { resolve(true) })
         })
     }
 }

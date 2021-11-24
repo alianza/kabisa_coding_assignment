@@ -4,7 +4,6 @@ import Header from "./components/Layout/Header/Header";
 import Menu from "./components/Layout/Menu/Menu";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SignIn from "./components/Pages/SignIn/SignIn";
-import firebase from "firebase/app";
 import Home from "./components/Pages/Home/Home";
 import Footer from "./components/Layout/Footer/Footer";
 import Quote from "./components/Pages/Quote/Quote";
@@ -16,6 +15,7 @@ import useTheme from "./lib/Theme";
 import { useEventListeners } from "./lib/EventListeners";
 import FirebaseService from "./services/FirebaseService";
 import localStorageService from "./services/localStorageService";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const darkThemeKey = 'darkTheme'
 
@@ -23,11 +23,12 @@ function App() {
     const [open, setOpenLogoutDialog] = useState(false)
     const [darkTheme, setDarkTheme] = useState(localStorageService.getValue(darkThemeKey))
     const [user, setUser] = useState()
+    const auth = getAuth()
 
     useEffect(() => { // Listen to the Firebase Auth state and set the local state.
-        const unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => { setUser(user) })
+        const unregisterAuthObserver = onAuthStateChanged(auth, user => { setUser(user) })
         return () => unregisterAuthObserver() // Make sure we un-register Firebase observers when the component unmounts.
-    }, [])
+    }, [auth])
 
     useTheme(darkTheme)
 

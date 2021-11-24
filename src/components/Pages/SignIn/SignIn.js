@@ -1,36 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import "./SignIn.scss"
 import { useHistory } from "react-router-dom";
-import firebase from 'firebase/app';
-import 'firebase/auth';
+import { getAuth, onAuthStateChanged, EmailAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import FirebaseService from "../../../services/FirebaseService";
 import getLanguage from "../../../lib/Language";
 
-const uiConfig = { // Configure FirebaseUI.
-    signInFlow: 'popup', // Popup signin flow rather than redirect flow.
-    signInOptions: [
-        firebase.auth.EmailAuthProvider.PROVIDER_ID,
-        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    ],
-    callbacks: { // Avoid redirects after sign-in.
-        signInSuccessWithAuthResult: () => false,
-    },
-};
-
 function SignIn(props) {
     const [isSignedIn, setIsSignedIn] = useState(false) // Local signed-in state.
     const [numberOfRatings, setNumberOfRatings] = useState(0)
+    const auth = getAuth()
     const history = useHistory()
-    const currentUser = firebase.auth().currentUser
+    const currentUser = auth.currentUser
+
+    const uiConfig = { // Configure FirebaseUI.
+        signInFlow: 'popup', // Popup signin flow rather than redirect flow.
+        signInOptions: [
+            EmailAuthProvider.PROVIDER_ID,
+            GoogleAuthProvider.PROVIDER_ID,
+        ],
+        callbacks: { // Avoid redirects after sign-in.
+            signInSuccessWithAuthResult: () => false,
+        },
+    };
 
     useEffect(() => { // Listen to the Firebase Auth state and set the local state.
-        const unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
+        const unregisterAuthObserver = onAuthStateChanged(auth, user => {
             setIsSignedIn(!!user)
             if (user) { history.push('/profile') }
         })
         return () => unregisterAuthObserver() // Make sure we un-register Firebase observers when the component unmounts.
-    }, [history, currentUser])
+    }, [history, currentUser, auth])
 
     useEffect(() => { // Get number of ratings for current user
         FirebaseService.getNumberOrRatings(props?.user?.uid, setNumberOfRatings)
@@ -46,7 +46,7 @@ function SignIn(props) {
             <div className="signIn">
                 <h1 data-tip="Log in to vote on quotes" className="title tooltip">Login/Signup</h1>
                 <p>Please sign-in:</p>
-                <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()}/>
+                <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth}/>
             </div>
         )
     } else {
