@@ -5,8 +5,9 @@ function Menu(props) {
     const { pathname } = useLocation();
 
     const about = () => {
-        alert('This is a react based quotes Application!\n' +
-            'For the kabisa coding assigment!\n' +
+        alert('This is a react based quotes network Application!\n' +
+            'Using the application you can look at and share random or popular Quotes and see their ratings.\n' +
+            'If you create an account or log in you can also rate quotes yourself and look at the Quotes you rated. \n' +
             'Made by Jan-Willem van Bremen - 2021');
     }
 
