@@ -13,9 +13,9 @@ import Popular from "./components/Pages/Popular/Popular";
 import Loader from "./components/Loader/Loader";
 import useTheme from "./lib/Theme";
 import { useEventListeners } from "./lib/EventListeners";
-import FirebaseService from "./services/FirebaseService";
 import localStorageService from "./services/localStorageService";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { logout } from "./services/firebaseService";
 
 const darkThemeKey = 'darkTheme'
 
@@ -39,7 +39,7 @@ function App() {
     const toggleTheme = () => { localStorageService.setKeyValue(darkThemeKey, !darkTheme); setDarkTheme(prevTheme => !prevTheme) }
 
     const logOut = () => {
-        FirebaseService.logout().then(() => {
+        logout().then(() => {
             setOpenLogoutDialog(true)
                 setTimeout(() => {
                     setOpenLogoutDialog(false)

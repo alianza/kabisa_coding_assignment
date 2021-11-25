@@ -4,25 +4,6 @@ import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/database';
-import 'firebase/compat/analytics';
-
-let firebaseConfig = {
-    apiKey: "AIzaSyABvMNKLEoX1Z67xRgzFMQvQFIZ5wOkxy4",
-    authDomain: "kabisa-coding-assignment-jw.firebaseapp.com",
-    projectId: "kabisa-coding-assignment-jw",
-    storageBucket: "kabisa-coding-assignment-jw.appspot.com",
-    messagingSenderId: "543412482975",
-    appId: "1:543412482975:web:d4464aa22a7bb1c93843aa",
-    databaseURL: "https://kabisa-coding-assignment-jw-default-rtdb.europe-west1.firebasedatabase.app/",
-    measurementId: "G-4L0QHDM97F"
-};
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig)
-firebase.database()
-firebase.analytics()
 
 ReactDOM.render(
   <React.StrictMode>

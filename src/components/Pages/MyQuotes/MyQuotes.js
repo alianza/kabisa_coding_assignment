@@ -4,8 +4,8 @@ import QuoteCard from "../../QuoteCard/QuoteCard";
 import QuoteService from "../../../services/QuoteService";
 import Loader from "../../../lib/Loader";
 import { NavLink } from "react-router-dom";
-import FirebaseService from "../../../services/FirebaseService";
 import BackToTopButton from "../../Buttons/ScrollToTopButton/ScrollToTopButton";
+import { getMyQuotes } from "../../../services/firebaseService";
 
 function MyQuotes(props) {
     const [quoteRefList, setQuoteRefList] = useState([])
@@ -13,7 +13,7 @@ function MyQuotes(props) {
     const [numberOfQuotes, setNumberOfQuotes] = useState()
 
     useEffect(() => { // Initial data fetch
-        FirebaseService.getMyQuotes(props.user).then(({numberOfQuotes, quoteRefList}) => {
+        getMyQuotes(props.user).then(({numberOfQuotes, quoteRefList}) => {
             if (numberOfQuotes === 0) { Loader.hideLoader() } else { Loader.showLoader() }
             setNumberOfQuotes(numberOfQuotes)
             setQuoteRefList(quoteRefList)

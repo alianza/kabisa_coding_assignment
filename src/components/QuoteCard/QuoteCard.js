@@ -1,13 +1,13 @@
 import './QuoteCard.scss'
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import FirebaseService from "../../services/FirebaseService";
 import ShareIcon from '@material-ui/icons/Share';
 import LinkIcon from "@material-ui/icons/Link";
 import RecordVoiceOverIcon from "@material-ui/icons/RecordVoiceOver";
 import ShareMenu from "../ShareMenu/ShareMenu";
 import StarRating from "../StarRating/StarRating";
 import getLanguage from "../../lib/Language";
+import { addRating, getQuoteRatings, removeRating } from "../../services/firebaseService";
 
 function QuoteCard(props) {
     const [rating, setRating] = useState({ rating: 0, timestamp: null })
@@ -22,13 +22,13 @@ function QuoteCard(props) {
 
     useEffect(() => { // Initial data fetch
         setRating(0) // Reset rating every time
-        FirebaseService.getQuoteRatings(props.quote, props.user, setRating, setAverageRating, setNumberOfRatings)
+        getQuoteRatings(props.quote, props.user, setRating, setAverageRating, setNumberOfRatings)
     }, [props.quote, props?.user] )
 
     const createRating = (rating) => {
         setRating(rating)
-        if (rating) { FirebaseService.addRating(rating, props.quote.id, props.user.uid) // Update rating
-        } else { FirebaseService.removeRating(props.quote.id, props.user.uid) } // Remove rating
+        if (rating) { addRating(rating, props.quote.id, props.user.uid) // Update rating
+        } else { removeRating(props.quote.id, props.user.uid) } // Remove rating
     }
 
     return (
