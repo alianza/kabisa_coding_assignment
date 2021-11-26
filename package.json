@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "start": "react-scripts start",
-    "build": "cross-env GENERATE_SOURCEMAP=false react-scripts build",
-    "build-with-maps": "react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "eject": "react-scripts eject",
@@ -44,7 +43,7 @@
     "workbox-streams": "^5.1.3"
   },
   "devDependencies": {
-    "serve": "^12.0.1"
+    "serve": "^13.0.2"
   },
   "eslintConfig": {
     "extends": [

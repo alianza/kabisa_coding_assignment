@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import useTheme from "./lib/Theme";
 import { useEventListeners } from "./lib/EventListeners";
 import localStorageService from "./services/localStorageService";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { logout } from "./services/firebaseService";
 
 // Components
@@ -29,11 +28,25 @@ function App() {
     const [open, setOpenLogoutDialog] = useState(false)
     const [darkTheme, setDarkTheme] = useState(localStorageService.getValue(darkThemeKey))
     const [user, setUser] = useState()
-    const auth = getAuth()
+    const [auth, setAuth] = useState()
+
+    useEffect(() => {
+        (async function importAuth() {
+            const { getAuth } = await import("firebase/auth")
+            setAuth(getAuth())
+        })()
+    }, [])
 
     useEffect(() => { // Listen to the Firebase Auth state and set the local state.
-        const unregisterAuthObserver = onAuthStateChanged(auth, user => { setUser(user) })
-        return () => unregisterAuthObserver() // Make sure we un-register Firebase observers when the component unmounts.
+        let unregisterAuthObserver
+        (async function importAuthStateAndObserve() {
+            if (auth) {
+                const { onAuthStateChanged } = await import("firebase/auth")
+                unregisterAuthObserver = onAuthStateChanged(auth, user => {
+                    setUser(user)
+                })
+        } })()
+        return () => unregisterAuthObserver && unregisterAuthObserver() // Make sure we un-register Firebase observers when the component unmounts.
     }, [auth])
 
     useTheme(darkTheme)
@@ -44,7 +57,7 @@ function App() {
 
     const toggleTheme = () => { localStorageService.setKeyValue(darkThemeKey, !darkTheme); setDarkTheme(prevTheme => !prevTheme) }
 
-    const logOut = () => {
+    const logOut = async () => {
         logout().then(() => {
             setOpenLogoutDialog(true)
                 setTimeout(() => {
@@ -87,15 +100,13 @@ function App() {
                         </React.Suspense>
                 </div>
 
-                        <React.Suspense fallback={<Loader active/>}>
+                    <React.Suspense fallback={<Loader active/>}>
+                <Footer darkTheme={darkTheme} onThemeButtonClick={toggleTheme}/>
 
-                    <Footer darkTheme={darkTheme} onThemeButtonClick={toggleTheme}/>
+                <Loader/>
 
-                    <Loader/>
-
-                    <LogoutDialog open={open}/>
-
-                        </React.Suspense>
+                <LogoutDialog open={open}/>
+                    </React.Suspense>
 
             </div>
         </Router>
