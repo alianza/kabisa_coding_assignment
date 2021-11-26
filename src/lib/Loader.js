@@ -1,6 +1,6 @@
 const Loader = {
     showLoader()  {
-        document.getElementById('loader').classList.add('active')
+        // document.getElementById('loader').classList.add('active')
     },
 
     hideLoader()  {
