@@ -12,16 +12,17 @@ import Loader from "./components/Loader/Loader";
 import Footer from "./components/Layout/Footer/Footer"
 import Header from "./components/Layout/Header/Header"
 import Menu from "./components/Layout/Menu/Menu"
+import About from "./components/Pages/About/about"
 
 // Lazy loaded pages
-const SignIn = React.lazy(() => import("./components/Pages/SignIn/SignIn"));
-const Home = React.lazy(() => import("./components/Pages/Home/Home"));
-const Quote = React.lazy(() => import("./components/Pages/Quote/Quote"));
-const MyQuotes = React.lazy(() => import("./components/Pages/MyQuotes/MyQuotes"));
-const Popular = React.lazy(() => import("./components/Pages/Popular/Popular"));
+const SignIn = React.lazy(() => import("./components/Pages/SignIn/SignIn"))
+const Home = React.lazy(() => import("./components/Pages/Home/Home"))
+const Quote = React.lazy(() => import("./components/Pages/Quote/Quote"))
+const MyQuotes = React.lazy(() => import("./components/Pages/MyQuotes/MyQuotes"))
+const Popular = React.lazy(() => import("./components/Pages/Popular/Popular"))
 
 // Lazy loaded components
-const LogoutDialog = React.lazy(() => import("./components/LogoutDialog/LogoutDialog"));
+const LogoutDialog = React.lazy(() => import("./components/LogoutDialog/LogoutDialog"))
 
 const darkThemeKey = 'darkTheme'
 
@@ -49,7 +50,7 @@ function App() {
             setOpenLogoutDialog(true)
                 setTimeout(() => {
                     setOpenLogoutDialog(false)
-                }, 1500);
+                }, 1500)
             }
         )
     }
@@ -79,6 +80,8 @@ function App() {
                         <Route exact path={['/login', '/profile']} render={({match}) =>
                             <SignIn user={user} logOut={logOut} match={match}/>}/>
 
+                        <Route exact path={['/about']} render={() => <About/>}/>
+
                         <Route render={() => <h1>404 Oops...</h1>}/>
                     </Switch>
 
@@ -92,7 +95,7 @@ function App() {
 
             </div>
         </Router>
-    );
+    )
 }
 
 export default App;

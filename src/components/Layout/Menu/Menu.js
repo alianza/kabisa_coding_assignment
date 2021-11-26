@@ -2,14 +2,7 @@ import './Menu.scss'
 import { NavLink, useLocation } from "react-router-dom";
 
 function Menu(props) {
-    const { pathname } = useLocation();
-
-    const about = () => {
-        alert('This is a react based quotes network Application!\n' +
-            'Using the application you can look at and share random or popular Quotes and see their ratings.\n' +
-            'If you create an account or log in you can also rate quotes yourself and look at the Quotes you rated. \n' +
-            'Made by Jan-Willem van Bremen - 2021');
-    }
+    const { pathname } = useLocation()
 
     const closeMenuIfMobile = () => {
         if (window.innerWidth < 600) {
@@ -33,11 +26,11 @@ function Menu(props) {
                     <li><NavLink to={'/'} activeClassName={''} onClick={() => props.logOut()}><span>Sign-Out</span></NavLink></li>
                 </>
                 }
-                <li onClick={about}>About</li>
+                <li><NavLink to={'/about'} isActive={() => pathname.includes('/about')}><span>About</span></NavLink></li>
             </ul>
             <p className="menu-bottom">Jan-Willem van Bremen</p>
         </div>
-    );
+    )
 }
 
 export default Menu;
