@@ -32,7 +32,7 @@ function Home(props) {
             </div>
             <RefreshButton onRefresh={fetchRandomQuote}/>
         </div>
-    );
+    )
 }
 
 export default Home;

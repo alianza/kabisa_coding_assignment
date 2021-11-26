@@ -20,7 +20,7 @@ function Header(props) {
                     <NavLink aria-label="Sign-in" to={'/login'}><h2>Log-in</h2></NavLink>}
             </div>
         </div>
-    );
+    )
 }
 
 export default Header;

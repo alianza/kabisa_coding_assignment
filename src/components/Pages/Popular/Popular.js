@@ -6,7 +6,7 @@ import QuoteCard from "../../QuoteCard/QuoteCard";
 import ScrollToTopButton from "../../Buttons/ScrollToTopButton/ScrollToTopButton";
 
 function Popular(props) {
-    const [quoteList, setQuoteList] = useState([]);
+    const [quoteList, setQuoteList] = useState([])
 
     useEffect(() => { // Initial data fetch
         fetchPopularQuotes()
@@ -28,7 +28,7 @@ function Popular(props) {
             </div>
             <ScrollToTopButton/>
         </div>
-    );
+    )
 }
 
 export default Popular;

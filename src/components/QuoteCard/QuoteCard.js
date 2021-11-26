@@ -52,7 +52,7 @@ function QuoteCard(props) {
                 </div>
             <ShareMenu anchorEl={anchorEl} onClose={closeShareMenu} urlToShare={shareUrl} quote={props.quote}/>
         </blockquote>
-    );
+    )
 }
 
 export default QuoteCard;

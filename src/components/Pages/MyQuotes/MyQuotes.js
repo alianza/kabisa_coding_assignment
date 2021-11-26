@@ -28,7 +28,7 @@ function MyQuotes(props) {
                     if (index >= numberOfQuotes - 1) {
                         Loader.hideLoader()
                     }})
-            });
+            })
         }
     }, [quoteRefList, numberOfQuotes])
 
@@ -44,7 +44,7 @@ function MyQuotes(props) {
             }
             {!!quoteList?.length && <BackToTopButton/>}
         </div>
-    );
+    )
 }
 
 export default MyQuotes;

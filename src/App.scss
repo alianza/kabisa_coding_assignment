@@ -63,9 +63,10 @@ a, button.link {
         padding: 1em 1em 8em;
 
         div .title {
-            margin: 0 0 1em 0;
+            margin: 0;
             position: relative;
             display: inline-block;
+            text-align: center;
 
             &:hover::before {
                 transition: opacity 1s ease-out, bottom .8s ease-out;
@@ -86,6 +87,12 @@ a, button.link {
 
 @media only screen and (max-width: $mobile_size) {
     #app {
+        & .content {
+            div .title {
+                text-align: start;
+            }
+        }
+
         & .menu {
             &-close {
                 display: inline-block;

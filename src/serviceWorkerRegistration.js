@@ -42,13 +42,13 @@ export function register(config) {
           console.log(
             'This web app is being served cache-first by a service ' +
               'worker. To learn more, visit https://cra.link/PWA'
-          );
-        });
+          )
+        })
       } else {
         // Is not localhost. Just register service worker
         registerValidSW(swUrl, config)
       }
-    });
+    })
   }
 }
 
@@ -70,7 +70,7 @@ function registerValidSW(swUrl, config) {
               console.log(
                 'New content is available and will be used when all ' +
                   'tabs for this page are closed. See https://cra.link/PWA.'
-              );
+              )
 
               // Execute callback
               if (config && config.onUpdate) {
@@ -80,7 +80,7 @@ function registerValidSW(swUrl, config) {
               // At this point, everything has been precached.
               // It's the perfect time to display a
               // "Content is cached for offline use." message.
-              console.log('Content is cached for offline use.');
+              console.log('Content is cached for offline use.')
 
               // Execute callback
               if (config && config.onSuccess) {
@@ -92,8 +92,8 @@ function registerValidSW(swUrl, config) {
       };
     })
     .catch((error) => {
-      console.error('Error during service worker registration:', error);
-    });
+      console.error('Error during service worker registration:', error)
+    })
 }
 
 function checkValidServiceWorker(swUrl, config) {
@@ -103,7 +103,7 @@ function checkValidServiceWorker(swUrl, config) {
   })
     .then((response) => {
       // Ensure service worker exists, and that we really are getting a JS file.
-      const contentType = response.headers.get('content-type');
+      const contentType = response.headers.get('content-type')
       if (
         response.status === 404 ||
         (contentType != null && contentType.indexOf('javascript') === -1)
@@ -112,16 +112,16 @@ function checkValidServiceWorker(swUrl, config) {
         navigator.serviceWorker.ready.then((registration) => {
           registration.unregister().then(() => {
             window.location.reload()
-          });
-        });
+          })
+        })
       } else {
         // Service worker found. Proceed as normal.
         registerValidSW(swUrl, config)
       }
     })
     .catch(() => {
-      console.log('No internet connection found. App is running in offline mode.');
-    });
+      console.log('No internet connection found. App is running in offline mode.')
+    })
 }
 
 export function unregister() {
@@ -131,7 +131,7 @@ export function unregister() {
         registration.unregister()
       })
       .catch((error) => {
-        console.error(error.message);
-      });
+        console.error(error.message)
+      })
   }
 }

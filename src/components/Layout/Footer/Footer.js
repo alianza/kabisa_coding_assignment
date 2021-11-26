@@ -9,7 +9,7 @@ function Footer(props) {
             <p>Quoty quotes network</p>
                 <button className="button" aria-label="Switch theme" onClick={() => props.onThemeButtonClick()}>{props.darkTheme ? <Brightness7Icon/> : <NightsStayIcon/>}</button>
         </div>
-    );
+    )
 }
 
 export default Footer;

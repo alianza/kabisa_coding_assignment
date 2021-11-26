@@ -35,7 +35,7 @@ function RefreshButton(props) {
                 }
             })
 
-            arrowSvg.setAttribute('class', 'arrow-svg arrow-animation');
+            arrowSvg.setAttribute('class', 'arrow-svg arrow-animation')
 
             arrowSegment.draw('50%', '50% + 0.01', 0.8, {callback: () => {
                     arrowSegment.draw('25%', '75%', 1.4, {easing: elasticOut.ease, callback: () => {
@@ -63,7 +63,7 @@ function RefreshButton(props) {
                 </svg>
             </button>
         </>
-    );
+    )
 }
 
 export default RefreshButton;

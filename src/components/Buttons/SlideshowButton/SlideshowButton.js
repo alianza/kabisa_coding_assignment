@@ -34,7 +34,7 @@ function SlideshowButton(props) {
             <TimerOffIcon onClick={() => setSlideShow(false)} className="svgButton"/> :
             <TimerIcon onClick={() => setSlideShow(true)} className="svgButton"/>
         }
-    </span>);
+    </span>)
 }
 
 export default SlideshowButton;
