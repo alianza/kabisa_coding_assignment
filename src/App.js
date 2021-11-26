@@ -9,6 +9,9 @@ import { getAuth, onAuthStateChanged } from "firebase/auth"
 
 // Components
 import Loader from "./components/Loader/Loader";
+import Footer from "./components/Layout/Footer/Footer"
+import Header from "./components/Layout/Header/Header"
+import Menu from "./components/Layout/Menu/Menu"
 
 // Lazy loaded pages
 const SignIn = React.lazy(() => import("./components/Pages/SignIn/SignIn"));
@@ -18,9 +21,6 @@ const MyQuotes = React.lazy(() => import("./components/Pages/MyQuotes/MyQuotes")
 const Popular = React.lazy(() => import("./components/Pages/Popular/Popular"));
 
 // Lazy loaded components
-const Header = React.lazy(() => import("./components/Layout/Header/Header"));
-const Menu = React.lazy(() => import("./components/Layout/Menu/Menu"));
-const Footer = React.lazy(() => import("./components/Layout/Footer/Footer"));
 const LogoutDialog = React.lazy(() => import("./components/LogoutDialog/LogoutDialog"));
 
 const darkThemeKey = 'darkTheme'
@@ -57,15 +57,12 @@ function App() {
     return (
         <Router>
             <div id="app">
-
-                    <React.Suspense fallback={<Loader active/>}>
                 <Header user={user} onMenuClick={toggleMenu} title={'Quoty'}/>
 
                 <Menu user={user} logOut={logOut} onMenuClick={toggleMenu}/>
-                    </React.Suspense>
 
                 <div className={'content'}>
-                        <React.Suspense fallback={null}>
+                        <React.Suspense fallback={<div><h1 className="title">Loading...</h1></div>}>
                     <Switch>
                         <Route exact path={['/']} render={({match}) =>
                             <Home user={user} match={match}/>}/>
@@ -84,16 +81,14 @@ function App() {
 
                         <Route render={() => <h1>404 Oops...</h1>}/>
                     </Switch>
+
+                        <LogoutDialog open={open}/>
                         </React.Suspense>
                 </div>
 
-                    <React.Suspense fallback={<Loader active/>}>
                 <Footer darkTheme={darkTheme} onThemeButtonClick={toggleTheme}/>
 
                 <Loader/>
-
-                <LogoutDialog open={open}/>
-                    </React.Suspense>
 
             </div>
         </Router>
