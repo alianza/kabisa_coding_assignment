@@ -5,6 +5,7 @@ import useTheme from "./lib/Theme";
 import { useEventListeners } from "./lib/EventListeners";
 import localStorageService from "./services/localStorageService";
 import { logout } from "./services/firebaseService";
+import { getAuth, onAuthStateChanged } from "firebase/auth"
 
 // Components
 import Loader from "./components/Loader/Loader";
@@ -28,25 +29,11 @@ function App() {
     const [open, setOpenLogoutDialog] = useState(false)
     const [darkTheme, setDarkTheme] = useState(localStorageService.getValue(darkThemeKey))
     const [user, setUser] = useState()
-    const [auth, setAuth] = useState()
-
-    useEffect(() => {
-        (async function importAuth() {
-            const { getAuth } = await import("firebase/auth")
-            setAuth(getAuth())
-        })()
-    }, [])
+    const auth = getAuth()
 
     useEffect(() => { // Listen to the Firebase Auth state and set the local state.
-        let unregisterAuthObserver
-        (async function importAuthStateAndObserve() {
-            if (auth) {
-                const { onAuthStateChanged } = await import("firebase/auth")
-                unregisterAuthObserver = onAuthStateChanged(auth, user => {
-                    setUser(user)
-                })
-        } })()
-        return () => unregisterAuthObserver && unregisterAuthObserver() // Make sure we un-register Firebase observers when the component unmounts.
+        const unregisterAuthObserver = onAuthStateChanged(auth, user => { setUser(user) })
+        return () => unregisterAuthObserver() // Make sure we un-register Firebase observers when the component unmounts.
     }, [auth])
 
     useTheme(darkTheme)
@@ -57,14 +44,14 @@ function App() {
 
     const toggleTheme = () => { localStorageService.setKeyValue(darkThemeKey, !darkTheme); setDarkTheme(prevTheme => !prevTheme) }
 
-    const logOut = async () => {
+    const logOut = () => {
         logout().then(() => {
             setOpenLogoutDialog(true)
                 setTimeout(() => {
                     setOpenLogoutDialog(false)
                 }, 1500);
             }
-        );
+        )
     }
 
     return (
