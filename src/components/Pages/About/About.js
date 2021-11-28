@@ -10,10 +10,13 @@ function About() {
             </p>
             <p>
                 The application is built using React, Firebase, the Material UI library, the <a href="http://quotes.stormconsultancy.co.uk/api"><b>Stormconsultancy Quotes API</b></a>.
-                The application is fully responsive, routed and uses React lazy loading for dynamic loading of components.
+                The application is fully responsive, routed and uses React lazy loading for dynamic loading of components and the React context API for the logged in user Context.
             </p>
             <p>
                 Made by <a href="https://jwvbremen.nl/" target="_blank" rel="noreferrer"><b>Jan-Willem van Bremen</b></a> - 2021
+            </p>
+            <p>
+                Check out the repository on <a href="https://github.com/alianza/quoty-quotes-network" target="_blank" rel="noreferrer"><b>GitHub</b></a>!
             </p>
         </div>
     )
