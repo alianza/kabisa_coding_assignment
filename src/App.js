@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.scss';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import useTheme from "./lib/Theme";
 import { useEventListeners } from "./lib/EventListeners";
 import localStorageService from "./services/localStorageService";
@@ -12,7 +12,7 @@ import Loader from "./components/Loader/Loader";
 import Footer from "./components/Layout/Footer/Footer"
 import Header from "./components/Layout/Header/Header"
 import Menu from "./components/Layout/Menu/Menu"
-import About from "./components/Pages/About/about"
+import Loading from "./components/Loading/Loading"
 
 // Lazy loaded pages
 const SignIn = React.lazy(() => import("./components/Pages/SignIn/SignIn"))
@@ -20,11 +20,15 @@ const Home = React.lazy(() => import("./components/Pages/Home/Home"))
 const Quote = React.lazy(() => import("./components/Pages/Quote/Quote"))
 const MyQuotes = React.lazy(() => import("./components/Pages/MyQuotes/MyQuotes"))
 const Popular = React.lazy(() => import("./components/Pages/Popular/Popular"))
+const FourOhFour = React.lazy(() => import("./components/Pages/404/404"))
+const About = React.lazy(() => import("./components/Pages/About/About"))
 
 // Lazy loaded components
 const LogoutDialog = React.lazy(() => import("./components/LogoutDialog/LogoutDialog"))
 
 const darkThemeKey = 'darkTheme'
+
+export const UserContext = React.createContext({})
 
 function App() {
     const [open, setOpenLogoutDialog] = useState(false)
@@ -57,32 +61,29 @@ function App() {
 
     return (
         <Router>
+        <UserContext.Provider value={user}>
             <div id="app">
-                <Header user={user} onMenuClick={toggleMenu} title={'Quoty'}/>
+                <Header onMenuClick={toggleMenu} title={'Quoty'}/>
 
-                <Menu user={user} logOut={logOut} onMenuClick={toggleMenu}/>
+                <Menu logOut={logOut} onMenuClick={toggleMenu}/>
 
                 <div className={'content'}>
-                        <React.Suspense fallback={<div><h1 className="title">Loading...</h1></div>}>
+                        <React.Suspense fallback={Loading()}>
+
                     <Switch>
-                        <Route exact path={['/']} render={({match}) =>
-                            <Home user={user} match={match}/>}/>
+                        <Route exact path={['/']} component={Home}/>
 
-                        <Route exact path={['/quote/:quoteId']} render={({match}) =>
-                            <Quote user={user} match={match}/>}/>
+                        <Route exact path={['/quote/:quoteId']} component={Quote}/>
 
-                        <Route exact path={['/quotes']} render={({match}) =>
-                            <MyQuotes user={user} match={match}/>}/>
+                        <Route exact path={['/quotes']} component={MyQuotes}/>
 
-                        <Route exact path={['/popular']} render={({match}) =>
-                            <Popular user={user} match={match}/>}/>
+                        <Route exact path={['/popular']} component={Popular}/>
 
-                        <Route exact path={['/login', '/profile']} render={({match}) =>
-                            <SignIn user={user} logOut={logOut} match={match}/>}/>
+                        <Route exact path={['/login', '/profile']}><SignIn logOut={logOut}/></Route>
 
-                        <Route exact path={['/about']} render={() => <About/>}/>
+                        <Route exact path={['/about']} component={About}/>
 
-                        <Route render={() => <h1>404 Oops...</h1>}/>
+                        <Route component={FourOhFour}/>
                     </Switch>
 
                         <LogoutDialog open={open}/>
@@ -94,6 +95,7 @@ function App() {
                 <Loader/>
 
             </div>
+        </UserContext.Provider>
         </Router>
     )
 }
