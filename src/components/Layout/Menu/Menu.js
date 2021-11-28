@@ -1,8 +1,12 @@
 import './Menu.scss'
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom"
+import { useContext } from "react"
+import { UserContext } from "../../../App"
 
 function Menu(props) {
     const { pathname } = useLocation()
+
+    const user = useContext(UserContext)
 
     const closeMenuIfMobile = () => {
         if (window.innerWidth < 600) {
@@ -17,7 +21,7 @@ function Menu(props) {
             <ul className="menu-top" onClick={() => closeMenuIfMobile()}>
                 <li><NavLink to={'/'} isActive={ (match) => pathname.includes('/page') || match.url === '/'}>Home</NavLink></li>
                 <li><NavLink to={'/popular'} isActive={() => pathname.includes('/popular')}>Popular Quotes</NavLink></li>
-                {!props.user ?
+                {!user ?
                 <li><NavLink to={'/login'} isActive={ () => pathname.includes('/login') }>Login</NavLink></li>
                     :
                 <>

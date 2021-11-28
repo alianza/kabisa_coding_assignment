@@ -1,12 +1,12 @@
 import './Home.scss'
-import React, { useEffect, useState } from "react";
-import quoteService from "../../../services/QuoteService";
-import Loader from "../../../lib/Loader";
-import QuoteCard from "../../QuoteCard/QuoteCard";
-import RefreshButton from "../../Buttons/RefreshButton/RefreshButton";
-import SlideshowButton from "../../Buttons/SlideshowButton/SlideshowButton";
+import React, { useEffect, useState } from "react"
+import quoteService from "../../../services/QuoteService"
+import Loader from "../../../lib/Loader"
+import QuoteCard from "../../QuoteCard/QuoteCard"
+import RefreshButton from "../../Buttons/RefreshButton/RefreshButton"
+import SlideshowButton from "../../Buttons/SlideshowButton/SlideshowButton"
 
-function Home(props) {
+function Home() {
     const [quote, setQuote] = useState()
 
     useEffect(() => { // Initial data fetch
@@ -28,7 +28,7 @@ function Home(props) {
                     <h1 className="title tooltip" data-tip="Display a random quote">Random Quote</h1>
                     <SlideshowButton fetchRandomQuote={fetchRandomQuote}/>
                 </div>
-                {quote && <QuoteCard match={props.match} user={props.user} quote={quote}/>}
+                {quote && <QuoteCard quote={quote}/>}
             </div>
             <RefreshButton onRefresh={fetchRandomQuote}/>
         </div>

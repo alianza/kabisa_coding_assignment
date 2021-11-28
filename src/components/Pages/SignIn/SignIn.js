@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react'
 import "./SignIn.scss"
-import { useHistory } from "react-router-dom";
-import { getAuth, onAuthStateChanged, EmailAuthProvider, GoogleAuthProvider } from "firebase/auth";
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import getLanguage from "../../../lib/Language";
-import { getNumberOrRatings } from "../../../services/firebaseService";
+import { useHistory } from "react-router-dom"
+import { getAuth, onAuthStateChanged, EmailAuthProvider, GoogleAuthProvider } from "firebase/auth"
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
+import getLanguage from "../../../lib/Language"
+import { getNumberOrRatings } from "../../../services/firebaseService"
+import { UserContext } from "../../../App"
 
 const uiConfig = { // Configure FirebaseUI.
     signInFlow: 'popup', // Popup signin flow rather than redirect flow.
@@ -24,6 +25,8 @@ function SignIn(props) {
     const auth = getAuth()
     const history = useHistory()
 
+    const user = useContext(UserContext)
+
     useEffect(() => { // Listen to the Firebase Auth state and set the local state.
         const unregisterAuthObserver = onAuthStateChanged(auth, user => {
             setIsSignedIn(!!user)
@@ -33,8 +36,8 @@ function SignIn(props) {
     }, [auth, history])
 
     useEffect(() => { // Get number of ratings for current user
-        getNumberOrRatings(props.user?.uid, setNumberOfRatings)
-    }, [props?.user?.uid])
+        getNumberOrRatings(user?.uid, setNumberOfRatings)
+    }, [user?.uid])
 
     const logOut = () => {
         props.logOut()
@@ -53,15 +56,15 @@ function SignIn(props) {
         return (
             <div className="signIn">
                 <h1 className="title tooltip" data-tip="Your profile information">My Profile</h1>
-                {props.user &&
+                {user &&
                 <>
-                    <p>Welcome: <span>{props.user?.displayName}!</span> You are now signed-in!</p>
+                    <p>Welcome: <span>{user?.displayName}!</span> You are now signed-in!</p>
                     <hr/>
-                    <p>Email: <span>{props.user?.email}!</span></p>
+                    <p>Email: <span>{user?.email}!</span></p>
                     <hr/>
-                    <p>Creation date: <span>{new Date(props.user?.metadata.creationTime).toLocaleString(getLanguage())}!</span></p>
+                    <p>Creation date: <span>{new Date(user?.metadata.creationTime).toLocaleString(getLanguage())}!</span></p>
                     <hr/>
-                    <p>Last sign on: <span>{new Date(props.user?.metadata.lastSignInTime).toLocaleString(getLanguage())}!</span></p>
+                    <p>Last sign on: <span>{new Date(user?.metadata.lastSignInTime).toLocaleString(getLanguage())}!</span></p>
                     <hr/>
                     <p>Number of ratings: <span>{numberOfRatings}!</span></p>
                     <hr/>

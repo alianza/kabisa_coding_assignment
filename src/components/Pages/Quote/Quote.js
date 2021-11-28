@@ -1,11 +1,11 @@
 import './Quote.scss'
-import React, { useEffect, useState } from "react";
-import quoteService from "../../../services/QuoteService";
-import Loader from "../../../lib/Loader";
-import QuoteCard from "../../QuoteCard/QuoteCard";
-import { useHistory } from "react-router-dom";
-import LinkIcon from '@material-ui/icons/Link';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import React, { useEffect, useState } from "react"
+import quoteService from "../../../services/QuoteService"
+import Loader from "../../../lib/Loader"
+import QuoteCard from "../../QuoteCard/QuoteCard"
+import { useHistory } from "react-router-dom"
+import LinkIcon from '@material-ui/icons/Link'
+import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 
 function Quote(props) {
     const [quote, setQuote] = useState()
@@ -32,7 +32,7 @@ function Quote(props) {
         <div className="quote">
             <h1 className="title">Quote #{props.match.params.quoteId}</h1>
             {quote && <>
-                <QuoteCard match={props.match} user={props.user} quote={quote}/>
+                <QuoteCard match={props.match} quote={quote}/>
                 <button data-tip="Copy quote url" aria-label="Copy quote url" id="copy" className="button tooltip"
                         onClick={copyQuoteUrl}>
                     <LinkIcon/>
