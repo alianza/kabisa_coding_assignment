@@ -33,7 +33,7 @@ function Quote(props) {
             <h1 className="title">Quote #{props.match.params.quoteId}</h1>
             {quote && <>
                 <QuoteCard match={props.match} quote={quote}/>
-                <button data-tip="Copy quote url" aria-label="Copy quote url" id="copy" className="button tooltip"
+                <button data-tip="Copy quote url" aria-label="Copy quote url" id="copy" className="button tooltip instant important"
                         onClick={copyQuoteUrl}>
                     <LinkIcon/>
                 </button>

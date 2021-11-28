@@ -18,7 +18,7 @@
 
     .info {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         margin: 1em 0;
 
         .author {
@@ -53,6 +53,7 @@
 
     .averageRating {
         margin-top: .5em;
+        text-align: center;
 
         span.ratingValue {
             font-weight: bold;
@@ -92,10 +93,9 @@
 @media only screen and (max-width: $mobile_size) {
     .quoteCard {
         .info {
-            flex-direction: column;
             align-items: center;
             gap: .5em;
-            margin-bottom: .2em;
+            flex-wrap: wrap;
         }
     }
 }

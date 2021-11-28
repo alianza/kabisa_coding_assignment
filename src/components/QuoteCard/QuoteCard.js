@@ -41,7 +41,7 @@ function QuoteCard(props) {
             <p className="quote">❝ {props.quote.quote}❞</p>
             <div className="info">
                 <cite className="author">
-                    <RecordVoiceOverIcon style={{marginRight: '6px'}} fontSize={"small"}/>{props.quote.author}
+                    {props.quote.author}<RecordVoiceOverIcon style={{marginLeft: '6px'}} fontSize={"small"}/>
                 </cite>
                 <button className="link" onClick={openShareMenu}>Share<ShareIcon style={{marginLeft: '6px'}} fontSize={"small"}/></button>
                 {!location.pathname.includes('/quote/') && <NavLink to={`/quote/${props.quote.id}`}>permalink<LinkIcon style={{marginLeft: '6px'}} fontSize={"small"}/></NavLink>}
@@ -53,7 +53,7 @@ function QuoteCard(props) {
                     {!!averageRating && <span className="ratingAmount">Based on {numberOfRatings} vote{numberOfRatings > 1 && 's'}!</span>}
                     </div>
                 </div>
-            {anchorEl && <ShareMenu anchorEl={anchorEl} onClose={closeShareMenu} urlToShare={shareUrl} quote={props.quote}/>}
+            <ShareMenu anchorEl={anchorEl} onClose={closeShareMenu} urlToShare={shareUrl} quote={props.quote}/>
         </blockquote>
     )
 }

@@ -118,4 +118,10 @@ a, button.link {
     }
 }
 
+@media (hover: none) {
+    a, button.link {
+        text-decoration-color: inherit;
+    }
+}
+
 @import 'css/scrollbar';

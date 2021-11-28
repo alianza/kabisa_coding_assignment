@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import "./SignIn.scss"
-import { useHistory } from "react-router-dom"
-import { getAuth, onAuthStateChanged, EmailAuthProvider, GoogleAuthProvider } from "firebase/auth"
+import { Link, useHistory } from "react-router-dom"
+import { getAuth, EmailAuthProvider, GoogleAuthProvider } from "firebase/auth"
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import getLanguage from "../../../lib/Language"
 import { getNumberOrRatings } from "../../../services/firebaseService"
@@ -20,20 +20,14 @@ const uiConfig = { // Configure FirebaseUI.
 };
 
 function SignIn(props) {
-    const [isSignedIn, setIsSignedIn] = useState(false) // Local signed-in state.
     const [numberOfRatings, setNumberOfRatings] = useState(0)
-    const auth = getAuth()
     const history = useHistory()
 
     const user = useContext(UserContext)
 
-    useEffect(() => { // Listen to the Firebase Auth state and set the local state.
-        const unregisterAuthObserver = onAuthStateChanged(auth, user => {
-            setIsSignedIn(!!user)
-            if (user) { history.push('/profile') }
-        })
-        return () => unregisterAuthObserver() // Make sure we un-register Firebase observers when the component unmounts.
-    }, [auth, history])
+    useEffect(() => { // Redirect on successful login
+        if (user) { history.push('/profile') }
+    }, [user, history])
 
     useEffect(() => { // Get number of ratings for current user
         getNumberOrRatings(user?.uid, setNumberOfRatings)
@@ -44,12 +38,12 @@ function SignIn(props) {
         history.push('/login')
     }
 
-    if (!isSignedIn) {
+    if (user !== undefined && !user) {
         return (
             <div className="signIn">
                 <h1 data-tip="Log in to vote on quotes" className="title tooltip">Login/Signup</h1>
                 <p>Please sign-in:</p>
-                <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth}/>
+                <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={getAuth()}/>
             </div>
         )
     } else {
@@ -66,7 +60,7 @@ function SignIn(props) {
                     <hr/>
                     <p>Last sign on: <span>{new Date(user?.metadata.lastSignInTime).toLocaleString(getLanguage())}!</span></p>
                     <hr/>
-                    <p>Number of ratings: <span>{numberOfRatings}!</span></p>
+                    <p>Number of ratings: <Link to={'/quotes'}><span>{numberOfRatings}!</span></Link></p>
                     <hr/>
                     <button className="button" onClick={logOut}>Sign-out</button>
                 </>

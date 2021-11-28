@@ -1,4 +1,14 @@
 .tooltip {
+
+    &.instant:hover::before {
+        transition-delay: 0s;
+    }
+
+    &.important:hover::before {
+        opacity: .95;
+        bottom: 100%;
+    }
+
     &::before {
         content: attr(data-tip);
         display: inline-block;
