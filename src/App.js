@@ -15,9 +15,9 @@ import Menu from "./components/Layout/Menu/Menu"
 import Loading from "./components/Loading/Loading"
 
 // Lazy loaded pages
-const SignIn = React.lazy(() => import("./components/Pages/SignIn/SignIn"))
 const Home = React.lazy(() => import("./components/Pages/Home/Home"))
 const Quote = React.lazy(() => import("./components/Pages/Quote/Quote"))
+const SignIn = React.lazy(() => import("./components/Pages/SignIn/SignIn"))
 const MyQuotes = React.lazy(() => import("./components/Pages/MyQuotes/MyQuotes"))
 const Popular = React.lazy(() => import("./components/Pages/Popular/Popular"))
 const FourOhFour = React.lazy(() => import("./components/Pages/404/404"))
